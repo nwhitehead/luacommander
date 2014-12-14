@@ -1,0 +1,51 @@
+# print out lines with US addresses
+perl -ne 'print if (/\bUS\b/i or /\bUSA\b/i or /\bUnited States\b/i)' work/groupon/itunes1_rejects_ips_addresses.tsv
+# Shows $_ for lots of stuff, default argument
+# OK to write something explicit
+# Finds lines including USA
+# -e is do this one liner thing (execute)
+# -n is process line by line
+
+# find most common IP addresses
+perl -F'\t' -ane '$h{$F[0]}++; END { for my $k (keys %h) { print join " ", $k, $h{$k}; print "\n" } }' work/groupon/itunes1_rejects_ips_addresses.tsv | sort -k2,2nr | head
+# Creates hash, counts IP occurrences
+# Tab deli, first col IP second is address
+# -a autosplits
+# -F tab  says use TAB for auto split
+# @F is populated by autosplit, so $F[0] is first field
+# END is special magic, code block for after all lines
+#   prints out IP addresses with their counts
+# piped into sort and head to demonstrate one-line unix command
+
+
+# normalize different ways to say US and save the original file in case you mess up
+# this saves the original test.tsv into test.tsv.bak
+perl -pi.bak -e 's/\bUS\b/USA/gi; s/\bUnited States\b/USA/gi; ' test.tsv
+# Showing in-place replacement
+# test.tsv is saved into test.tsv.bak (from -i.bak option)
+# -p says do this stuff then print
+# Normalizing various US abbrevs to USA, global to entire file
+# (if we have -n it would be global in line)
+# New version saved into test.tsv (that’s what -i does)
+
+
+# similar to grep -n
+perl -ne 'print join " | ", $., $_ if ($_ !~ /\bUS\b/i and $_ !~ /\bUSA\b/i and $_ !~ /\bUnited States/i)' work/groupon/itunes1_rejects_ips_addresses.tsv
+# Show line number of each match
+# Finds lines that don’t contain USA or variant (non US addresses) 
+# $. is line number (automatic)
+# $_ is current line
+# join takes separator and bunch of args, puts separator between args
+# line is not auto-chomped by -n
+# input record separator is still attached to $_
+
+
+Want:
+-e
+-n
+-p
+-a -F
+-i
+Plus auto defs inside code
+Ideally, also ability to give IRS for -n
+chomp (uses IRS)

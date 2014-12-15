@@ -5,6 +5,11 @@ perl -ne 'print if (/\bUS\b/i or /\bUSA\b/i or /\bUnited States\b/i)' work/group
 # Finds lines including USA
 # -e is do this one liner thing (execute)
 # -n is process line by line
+##
+### ./luacmd -n -e "x=x or {}; x[_] = (x[_] or 0) + 1; function final() for k, v in pairs(x) do print(k, v) end end" < DESIGN 
+### ./luacmd -n -e "if re.match(_, '.*a.*') then print(_) end" < DESIGN 
+### for m in re.gmatch('abcdefg', '[cde]') do print(m) end
+
 
 # find most common IP addresses
 perl -F'\t' -ane '$h{$F[0]}++; END { for my $k (keys %h) { print join " ", $k, $h{$k}; print "\n" } }' work/groupon/itunes1_rejects_ips_addresses.tsv | sort -k2,2nr | head

@@ -93,6 +93,7 @@ int main(int argc, char *argv[]) {
     lua_gc(L, LUA_GCSTOP, 0);  /* stop collector during initialization */
     luaL_openlibs(L);  /* open libraries */
     dostring(L, "re=require('rex_pcre');\n", "header");
+    dostring(L, "inspect=require('inspect');\n", "header");
     lua_gc(L, LUA_GCRESTART, -1);
     // Go through options
     int i = 1;

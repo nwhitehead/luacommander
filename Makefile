@@ -1,12 +1,14 @@
 OUTPUT = out/luacmd
 CSOURCE = src/main.c
 REGEXOBJS = regex/common.o regex/pcre/lpcre.o regex/pcre/lpcre_f.o
-OBJS = ${CSOURCE:.c=.o} ${REGEXOBJS}
+LUAOBJS = src/inspect.o
+OBJS = ${CSOURCE:.c=.o} ${REGEXOBJS} ${LUAOBJS}
 CC = gcc
 CINCLUDE = /usr/local/include/luajit-2.0
 CFLAGS = -O2 ${foreach d, ${CINCLUDE}, -I$d} -fpic -DREGEXVERSION=\"2.7.1\"
-LFLAGS = -lluajit-5.1 -lpcre
+LFLAGS = -Wl,-E -lluajit-5.1 -lpcre -ldl
 REGEXLIB = out/pcre.so
+LUA = luajit
 
 all: ${OUTPUT}
 
@@ -16,6 +18,9 @@ ${OUTPUT}: ${OBJS} ${REGEXLIB}
 
 %.o : %.c
 	${CC} -c -o $@ $< ${CFLAGS}
+
+%.o : %.lua
+	${LUA} -b $< $@
 
 clean:
 	rm -f ${OUTPUT} ${OBJS} ${REGEXOBJS} ${REGEXLIB}

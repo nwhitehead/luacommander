@@ -81,6 +81,19 @@ static int dostring(lua_State *L, const char *s, const char *name) {
     return report(L, status);
 }
 
+/* Handle -e option */
+static void handleexpr(lua_State *L, bool lines, bool autosplit, char *irs, char *crs, char *expr) {
+    lua_getglobal(L, "__process");
+    char buf[MAXBUF];
+    snprintf(buf, MAXBUF, "return function(_, _F) %s end\n", expr);
+    luaL_loadbuffer(L, buf, strlen(buf), "expression");
+    docall(L, 0, 0);
+    lua_pushboolean(L, lines);
+    lua_pushboolean(L, autosplit);
+    lua_pushstring(L, irs);
+    lua_pushstring(L, crs);
+    docall(L, 5, 1);
+}
 
 /** MAIN **/
 int main(int argc, char *argv[]) {
@@ -104,24 +117,18 @@ int main(int argc, char *argv[]) {
     int i = 1;
     bool lines = false;
     bool autosplit = false;
-    char irs = '\n';
-    char crs = '\t';
+    char *irs = "\\n";
+    char *crs = "\\t";
     while (i < argc) {
         if (argv[i][0] == '-') {
             if (argv[i][1] == 'e') {
                 if (i < argc) {
                     i++;
-                    if (lines) {
-                        char buf[MAXBUF];
-                        snprintf(buf, MAXBUF, "for _ in io.lines() do\n%s\nend\nif final then final() end\n", argv[i]);
-                        dostring(L, buf, "expression");
-                    } else {
-                        dostring(L, argv[i], "expression");
-                    }
+                    handleexpr(L, lines, autosplit, irs, crs, argv[i]);
                     i++;
                     continue;                    
                 } else {
-                    l_message(argv[0], "Illegal argument");
+                    l_message(argv[0], "No expression to evaluate for -e");
                     goto cleanup;
                 }
             }

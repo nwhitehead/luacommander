@@ -84,17 +84,17 @@ there are no lines of input.
 The `inspect` function is included by default. This function provides
 a human-readable string representation of tables.
 
-Several table iterators are provided for convenience. The usually table iterator
+Several table iterators are provided for convenience. The usual table iterator
 `pairs` iterates through a table in arbitrary order, while `ipairs`
 iterates in order through a table that has array structure (sequential numeric keys
-starting from 1). The iterator `ordered` iterates through keys in the table
-in order. The iterator `sorted` iterates through elements of the table sorted by
+starting from 1). The iterator `ordered` iterates through elements in the table
+sorted by key. The iterator `sorted` iterates through elements of the table sorted by
 value. The iterator `reverseordered` iterates through keys in reverse order, while
 `reversesorted` interates through elements from largest value to smallest value.
 
-The function `keys` converts an iterator into an array of key
+The function `keys` converts an iterator into the array of key
 values that are visited by the iterator. The function `values` converts an iterator
-into an array of values that are visited by the iterator.
+into the array of values that are visited by the iterator.
 
 When using `string.match`, be careful because on a successful match
 it returns multiple values that represent the way the string matched

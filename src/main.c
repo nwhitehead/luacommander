@@ -84,18 +84,21 @@ static int dostring(lua_State *L, const char *s, const char *name) {
 /* Handle -e option */
 static void handleexpr(lua_State *L, bool lines, char *irs, char *crs,
                        char *expr, char *exprEnd) {
+    int status;
     lua_getglobal(L, "__process");
     char buf[MAXBUF];
     if (expr) {
         snprintf(buf, MAXBUF, "return function(_, _F) %s end\n", expr);
-        luaL_loadbuffer(L, buf, strlen(buf), "expression");
+        status = luaL_loadbuffer(L, buf, strlen(buf), "expression");
+        report(L, status);
         docall(L, 0, 0);
     } else {
         lua_pushnil(L);
     }
     if (exprEnd) {
         snprintf(buf, MAXBUF, "return function(_, _F) %s end\n", exprEnd);
-        luaL_loadbuffer(L, buf, strlen(buf), "expressionEnd");
+        status = luaL_loadbuffer(L, buf, strlen(buf), "expressionEnd");
+        report(L, status);
         docall(L, 0, 0);
     } else {
         lua_pushnil(L);
@@ -103,7 +106,7 @@ static void handleexpr(lua_State *L, bool lines, char *irs, char *crs,
     lua_pushboolean(L, lines);
     lua_pushstring(L, irs);
     lua_pushstring(L, crs);
-    docall(L, 5, 1);
+    docall(L, 5, 0);
 }
 
 /** MAIN **/

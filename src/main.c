@@ -82,17 +82,29 @@ static int dostring(lua_State *L, const char *s, const char *name) {
 }
 
 /* Handle -e option */
-static void handleexpr(lua_State *L, bool lines, bool autosplit, char *irs, char *crs, char *expr) {
+static void handleexpr(lua_State *L, bool lines, bool autosplit,
+    char *irs, char *crs, char *expr, char *exprEnd) {
     lua_getglobal(L, "__process");
     char buf[MAXBUF];
-    snprintf(buf, MAXBUF, "return function(_, _F) %s end\n", expr);
-    luaL_loadbuffer(L, buf, strlen(buf), "expression");
-    docall(L, 0, 0);
+    if (expr) {
+        snprintf(buf, MAXBUF, "return function(_, _F) %s end\n", expr);
+        luaL_loadbuffer(L, buf, strlen(buf), "expression");
+        docall(L, 0, 0);
+    } else {
+        lua_pushnil(L);
+    }
+    if (exprEnd) {
+        snprintf(buf, MAXBUF, "return function(_, _F) %s end\n", exprEnd);
+        luaL_loadbuffer(L, buf, strlen(buf), "expressionEnd");
+        docall(L, 0, 0);
+    } else {
+        lua_pushnil(L);
+    }
     lua_pushboolean(L, lines);
     lua_pushboolean(L, autosplit);
     lua_pushstring(L, irs);
     lua_pushstring(L, crs);
-    docall(L, 5, 1);
+    docall(L, 6, 1);
 }
 
 /** MAIN **/
@@ -119,12 +131,14 @@ int main(int argc, char *argv[]) {
     bool autosplit = false;
     char *irs = "\\n";
     char *crs = "\\t";
+    char *expr = NULL;
+    char *exprEnd = NULL;
     while (i < argc) {
         if (argv[i][0] == '-') {
             if (argv[i][1] == 'e') {
                 if (i < argc) {
                     i++;
-                    handleexpr(L, lines, autosplit, irs, crs, argv[i]);
+                    expr = argv[i];
                     i++;
                     continue;                    
                 } else {
@@ -142,9 +156,34 @@ int main(int argc, char *argv[]) {
                 i++;
                 continue;
             }
+            if (argv[i][1] == 'z') {
+                i++;
+                exprEnd = argv[i];
+                i++;
+                continue;
+            }
         }
 cleanup:
         l_message(argv[0], "Illegal argument");
+        lua_close(L);
+        return EXIT_FAILURE;
+    }
+    // Check for some illegal option combinations
+    if (autosplit && !lines) {
+        l_message(argv[0], "Autosplitting without -n option is illegal");
+        lua_close(L);
+        return EXIT_FAILURE;        
+    }
+    if (exprEnd && !lines) {
+        l_message(argv[0], "Final expression without -n option is illegal");
+        lua_close(L);
+        return EXIT_FAILURE;        
+    }
+    if (expr || exprEnd) {
+        // Evaluate expression
+        handleexpr(L, lines, autosplit, irs, crs, expr, exprEnd);
+    } else {
+        l_message(argv[0], "No expression to evaluation");
         lua_close(L);
         return EXIT_FAILURE;
     }

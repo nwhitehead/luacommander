@@ -1,16 +1,22 @@
 re=require('rex_pcre')
 inspect=require('inspect')
 
-function __process(f, lines, autosplit, irs, crs)
-    if __debug then
-        print('__process', f, lines, autosplit, irs, crs)
-    end
+function __process(f, fend, lines, autosplit, irs, crs)
     if lines then
         for _ in io.lines() do
-            f(_)
+            if f then
+                f(_)
+            end
         end
-        if final then final() end
+        if fend then
+            fend()
+        end
         return
     end
-    f()
+    if f then
+        f()
+    end
+    if fend then
+        fend()
+    end
 end

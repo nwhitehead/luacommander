@@ -31,7 +31,7 @@ clean:
 	rm -fr out/
 
 test: ${OUTPUT}
-	./${OUTPUT} -e "print('hi')"
+	./runtests.sh ${OUTPUT}
 
 ${REGEXLIB}: ${REGEXOBJS}
 	mkdir -p out/

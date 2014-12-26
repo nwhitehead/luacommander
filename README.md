@@ -15,6 +15,11 @@ Some of the features:
 * Automatically splits lines into fields with a programmable field separator
 * Handy iterators predefined for common tasks (order by keys, order by values)
 
+## Requirements
+
+* LuaJIT 2.0+ (available at http://luajit.org)
+* PCRE (available at http://pcre.org)
+
 ## Examples
 
 Here are some simple example demonstrating how to use Lua Commander.

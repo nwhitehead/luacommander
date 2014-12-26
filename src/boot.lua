@@ -1,4 +1,4 @@
-re=require('rex_pcre')
+re=require('liblpcre')
 inspect=require('inspect')
 
 -- Polyfill pack and unpack

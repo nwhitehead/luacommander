@@ -92,7 +92,9 @@ static void handleexpr(lua_State *L, bool lines, char *irs, char *crs,
         status = luaL_loadbuffer(L, buf, strlen(buf), "expression");
         report(L, status);
         if (status) return;
-        docall(L, 0, 0);
+        status = docall(L, 0, 0);
+        report(L, status);
+        if (status) return;
     } else {
         lua_pushnil(L);
     }
@@ -101,14 +103,18 @@ static void handleexpr(lua_State *L, bool lines, char *irs, char *crs,
         status = luaL_loadbuffer(L, buf, strlen(buf), "expressionEnd");
         report(L, status);
         if (status) return;
-        docall(L, 0, 0);
+        status = docall(L, 0, 0);
+        report(L, status);
+        if (status) return;
     } else {
         lua_pushnil(L);
     }
     lua_pushboolean(L, lines);
     lua_pushstring(L, irs);
     lua_pushstring(L, crs);
-    docall(L, 5, 0);
+    status = docall(L, 5, 0);
+    report(L, status);
+    if (status) return;
 }
 
 /** MAIN **/

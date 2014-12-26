@@ -13,6 +13,12 @@ echo "luacmd: [string \"expression\"]:1: unexpected symbol near '1'" | cmp -b - 
 ${lua} -n -z "1" > ${log} 2>&1
 echo "luacmd: [string \"expressionEnd\"]:1: unexpected symbol near '1'" | cmp -b - ${log}
 
+# Test dynamic error
+${lua} -e "error(1)" > ${log} 2>&1
+echo "luacmd: [string \"expression\"]:1: 1" | cmp -n 35 -b - ${log}
+${lua} -n -e "" -z "error(1)" < /dev/null > ${log} 2>&1
+echo "luacmd: [string \"expressionEnd\"]:1: 1" | cmp -n 35 -b - ${log}
+
 # Test inspect module correctly loaded
 ${lua} -e "print(inspect({}))" > ${log}
 echo '{}' | cmp -b - ${log}
@@ -61,3 +67,11 @@ echo -n -e '{ "abc", "def", "ghi" }\n{ "n", "o", "j", "w" }\n' | cmp -b - ${log}
 echo -n -e 'abc\tdef\tghi\nn\to\tj\tw\n' | \
     ${lua} -n -F '\t' -e "print(inspect(_F))" > ${log}
 echo -n -e '{ "abc", "def", "ghi" }\n{ "n", "o", "j", "w" }\n' | cmp -b - ${log}
+
+# Application test: IP count
+echo -n -e "127.0.0.1\tlocalhost\n127.0.0.1\tlocalhost\n168.192.2.100\tserver\n" | \
+    ${lua} -n -F '\t' \
+    -e "x = x or {}; x[_F[1]] = (x[_F[1]] or 0) + 1" \
+    -z "for k, v in reversesorted(x) do print(k .. ' ' .. v) end" > ${log}
+echo -n -e "127.0.0.1 2\n168.192.2.100 1\n" | \
+    cmp -b - ${log}

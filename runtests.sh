@@ -7,11 +7,17 @@ log=out/log
 ${lua} -e "print('hi')" > ${log}
 echo 'hi' | cmp -b - ${log}
 
+# Test simple error
+${lua} -e "1" > ${log} 2>&1
+echo "luacmd: [string \"expression\"]:1: unexpected symbol near '1'" | cmp -b - ${log}
+${lua} -n -z "1" > ${log} 2>&1
+echo "luacmd: [string \"expressionEnd\"]:1: unexpected symbol near '1'" | cmp -b - ${log}
+
 # Test inspect module correctly loaded
 ${lua} -e "print(inspect({}))" > ${log}
 echo '{}' | cmp -b - ${log}
 
-# Test simpe regular expression
+# Test simple regular expression
 ${lua} -e "print(re.match('dead', '.*ad.*'))" > ${log}
 echo 'dead' | cmp -b - ${log}
 ${lua} -e "print(re.match('dead', '.*jj.*'))" > ${log}

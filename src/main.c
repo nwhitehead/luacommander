@@ -82,7 +82,7 @@ static int dostring(lua_State *L, const char *s, const char *name) {
 }
 
 /* Handle -e option */
-static void handleexpr(lua_State *L, bool lines, char *irs, char *crs,
+static void handleexpr(lua_State *L, bool lines, bool printit, char *irs, char *crs,
                        char *expr, char *exprEnd) {
     int status;
     lua_getglobal(L, "__process");
@@ -110,9 +110,10 @@ static void handleexpr(lua_State *L, bool lines, char *irs, char *crs,
         lua_pushnil(L);
     }
     lua_pushboolean(L, lines);
+    lua_pushboolean(L, printit);
     lua_pushstring(L, irs);
     lua_pushstring(L, crs);
-    status = docall(L, 5, 0);
+    status = docall(L, 6, 0);
     report(L, status);
     if (status) return;
 }
@@ -138,8 +139,9 @@ int main(int argc, char *argv[]) {
     // Go through options
     int i = 1;
     bool lines = false;
-    char *irs = "\\n";
-    char *crs = "\\s+";
+    bool printit = false;
+    char *irs = NULL;
+    char *crs = NULL;
     char *expr = NULL;
     char *exprEnd = NULL;
     while (i < argc) {
@@ -166,6 +168,11 @@ int main(int argc, char *argv[]) {
                 i++;
                 continue;
             }
+            if (argv[i][1] == 'p') {
+                printit = true;
+                i++;
+                continue;
+            }
             if (argv[i][1] == 'L') {
                 i++;
                 irs = argv[i];
@@ -175,6 +182,12 @@ int main(int argc, char *argv[]) {
             if (argv[i][1] == 'F') {
                 i++;
                 crs = argv[i];
+                i++;
+                continue;
+            }
+            if (argv[i][1] == 'I') {
+                i++;
+                irs = argv[i];
                 i++;
                 continue;
             }
@@ -192,7 +205,7 @@ cleanup:
     }
     if (expr || exprEnd) {
         // Evaluate expression
-        handleexpr(L, lines, irs, crs, expr, exprEnd);
+        handleexpr(L, lines, printit, irs, crs, expr, exprEnd);
     } else {
         l_message(argv[0], "No expression to evaluation");
         lua_close(L);

@@ -73,7 +73,7 @@ The field separator can be set to any regular expression using the `-F`
 option. The input line is split based on the expression which means that
 each field element does not contain the field separator characters.
 
-The line separator can be changed with the `-I' option. The input
+The line separator can be changed with the `-I` option. The input
 file is split using this regular expression. So by default each line
 stored in the `_` variable does not include a newline at the end.
 

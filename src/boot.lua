@@ -9,7 +9,7 @@ function string.split(str, delim, opts)
     return result
 end
 
-function __process(f, fend, lines, autosplit, irs, crs)
+function __process(f, fend, lines, irs, crs)
     if lines then
         for _ in io.lines() do
             local _F = string.split(_, crs)

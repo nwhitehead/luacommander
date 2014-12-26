@@ -82,8 +82,8 @@ static int dostring(lua_State *L, const char *s, const char *name) {
 }
 
 /* Handle -e option */
-static void handleexpr(lua_State *L, bool lines, bool autosplit,
-    char *irs, char *crs, char *expr, char *exprEnd) {
+static void handleexpr(lua_State *L, bool lines, char *irs, char *crs,
+                       char *expr, char *exprEnd) {
     lua_getglobal(L, "__process");
     char buf[MAXBUF];
     if (expr) {
@@ -101,10 +101,9 @@ static void handleexpr(lua_State *L, bool lines, bool autosplit,
         lua_pushnil(L);
     }
     lua_pushboolean(L, lines);
-    lua_pushboolean(L, autosplit);
     lua_pushstring(L, irs);
     lua_pushstring(L, crs);
-    docall(L, 6, 1);
+    docall(L, 5, 1);
 }
 
 /** MAIN **/
@@ -128,7 +127,6 @@ int main(int argc, char *argv[]) {
     // Go through options
     int i = 1;
     bool lines = false;
-    bool autosplit = false;
     char *irs = "\\n";
     char *crs = "\\s+";
     char *expr = NULL;
@@ -163,11 +161,6 @@ int main(int argc, char *argv[]) {
                 i++;
                 continue;
             }
-            if (argv[i][1] == 'a') {
-                autosplit = true;
-                i++;
-                continue;
-            }
             if (argv[i][1] == 'F') {
                 i++;
                 crs = argv[i];
@@ -181,11 +174,6 @@ cleanup:
         return EXIT_FAILURE;
     }
     // Check for some illegal option combinations
-    if (autosplit && !lines) {
-        l_message(argv[0], "Autosplitting without -n option is illegal");
-        lua_close(L);
-        return EXIT_FAILURE;        
-    }
     if (exprEnd && !lines) {
         l_message(argv[0], "Final expression without -n option is illegal");
         lua_close(L);
@@ -193,7 +181,7 @@ cleanup:
     }
     if (expr || exprEnd) {
         // Evaluate expression
-        handleexpr(L, lines, autosplit, irs, crs, expr, exprEnd);
+        handleexpr(L, lines, irs, crs, expr, exprEnd);
     } else {
         l_message(argv[0], "No expression to evaluation");
         lua_close(L);

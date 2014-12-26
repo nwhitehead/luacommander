@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
     bool lines = false;
     bool autosplit = false;
     char *irs = "\\n";
-    char *crs = "\\t";
+    char *crs = "\\s+";
     char *expr = NULL;
     char *exprEnd = NULL;
     while (i < argc) {
@@ -146,8 +146,20 @@ int main(int argc, char *argv[]) {
                     goto cleanup;
                 }
             }
+            if (argv[i][1] == 'z') {
+                i++;
+                exprEnd = argv[i];
+                i++;
+                continue;
+            }
             if (argv[i][1] == 'n') {
                 lines = true;
+                i++;
+                continue;
+            }
+            if (argv[i][1] == 'L') {
+                i++;
+                irs = argv[i];
                 i++;
                 continue;
             }
@@ -156,9 +168,9 @@ int main(int argc, char *argv[]) {
                 i++;
                 continue;
             }
-            if (argv[i][1] == 'z') {
+            if (argv[i][1] == 'F') {
                 i++;
-                exprEnd = argv[i];
+                crs = argv[i];
                 i++;
                 continue;
             }

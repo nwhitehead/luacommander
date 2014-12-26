@@ -40,3 +40,18 @@ cmp -b DESIGN ${log}
 echo -n -e 'abc\ndef\nghi\npail\n' | \
     ${lua} -n -e "if re.match(_, '.*a.*') then print(_) end" > ${log}
 echo -n -e 'abc\npail\n' | cmp -b - ${log}
+
+# Check autosplitting with default whitespace
+echo -n -e 'abc \t def  ghi\n' | \
+    ${lua} -n -e "print(inspect(_F))" > ${log}
+echo -n -e '{ "abc", "def", "ghi" }\n' | cmp -b - ${log}
+
+# Check autosplitting with commas
+echo -n -e 'abc,def,ghi\nn,o,j,w\n' | \
+    ${lua} -n -F ',' -e "print(inspect(_F))" > ${log}
+echo -n -e '{ "abc", "def", "ghi" }\n{ "n", "o", "j", "w" }\n' | cmp -b - ${log}
+
+# Check autosplitting with tabs
+echo -n -e 'abc\tdef\tghi\nn\to\tj\tw\n' | \
+    ${lua} -n -F '\t' -e "print(inspect(_F))" > ${log}
+echo -n -e '{ "abc", "def", "ghi" }\n{ "n", "o", "j", "w" }\n' | cmp -b - ${log}

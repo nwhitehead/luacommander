@@ -23,13 +23,12 @@ add_custom_command(
     COMMAND luajit -b inspect.lua inspect.o
 )
 
-include_directories(/usr/include/lua5.1)
-add_library(rex_pcre SHARED regex/common.c regex/pcre/lpcre.c regex/pcre/lpcre_f.c)
-add_definitions(-DREGEXVERSION="2.7.2")
-add_definitions(-DREX_OPENLIB=luaopen_librex_pcre)
-target_link_libraries(rex_pcre ${PCRE_PCRE_LIBRARY})
-
 include_directories(${LUA_INCLUDE_DIR})
 target_link_libraries(luacmd 
     ${CMAKE_DL_LIBS} ${LUA_LIBRARY} ${PCRE_PCRE_LIBRARY})
 set_target_properties(luacmd PROPERTIES ENABLE_EXPORTS true)
+
+add_custom_target(unittests
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/DESIGN DESIGN
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/runtests.sh ${CMAKE_CURRENT_BINARY_DIR}/luacmd
+)

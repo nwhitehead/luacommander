@@ -1,5 +1,26 @@
-re=require('librex_pcre')
+re=require('rex_pcre')
 inspect=require('inspect')
+
+-- Make print use inspect for tables
+local old_print = print
+function print(...)
+    local n = select('#', ...)
+    local args = {...}
+    local prev = false
+    for i=1,n do
+        if prev then
+            io.write('\t')
+        end
+        local v = args[i]
+        if type(v) == 'table' then
+            io.write(inspect(v))
+        else
+            io.write(tostring(v))
+        end
+        prev = true
+    end
+    io.write('\n')
+end
 
 -- Polyfill pack and unpack
 table.unpack = table.unpack or unpack

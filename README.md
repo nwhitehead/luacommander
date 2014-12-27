@@ -19,6 +19,7 @@ Some of the features:
 
 * LuaJIT 2.0+ (available at http://luajit.org)
 * PCRE (available at http://pcre.org)
+* lrex-pcre (available from http://luarocks.org)
 
 ## Examples
 

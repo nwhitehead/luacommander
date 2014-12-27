@@ -28,7 +28,7 @@ target_link_libraries(luacmd
     ${CMAKE_DL_LIBS} ${LUA_LIBRARY} ${PCRE_PCRE_LIBRARY})
 set_target_properties(luacmd PROPERTIES ENABLE_EXPORTS true)
 
-add_custom_target(unittests
+add_custom_target(test
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/DESIGN DESIGN
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/runtests.sh ${CMAKE_CURRENT_BINARY_DIR}/luacmd
 )

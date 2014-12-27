@@ -2,7 +2,6 @@ re=require('rex_pcre')
 inspect=require('inspect')
 
 -- Make print use inspect for tables
-local old_print = print
 function print(...)
     local n = select('#', ...)
     local args = {...}

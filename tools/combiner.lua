@@ -50,8 +50,8 @@ end
 
 -- Main function
 function main(files)
-    local output = readfile(files[1]) .. combinerHead
-    for i = 2, #files - 1 do
+    local output = combinerHead
+    for i = 1, #files - 1 do
         local filename = files[i]
         output = output .. process(filename)
     end

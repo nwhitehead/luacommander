@@ -19,19 +19,21 @@ find_package(Lua REQUIRED)
 
 find_package(PCRE REQUIRED)
 
-configure_file(src/header.lua ${CMAKE_CURRENT_BINARY_DIR}/header)
 set(LUA_FILES src/inspect.lua src/boot.lua src/main.lua)
 prepend(LUA_FILES_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${LUA_FILES})
 
 add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/luacmd
-    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/header
-    COMMAND ${LUA_BINARY} ${CMAKE_CURRENT_SOURCE_DIR}/tools/combiner.lua ${CMAKE_CURRENT_BINARY_DIR}/header ${LUA_FILES_DIR} > ${CMAKE_CURRENT_BINARY_DIR}/luacmd
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/luacmd.o
+    COMMAND ${LUA_BINARY} ${CMAKE_CURRENT_SOURCE_DIR}/tools/combiner.lua ${LUA_FILES_DIR} > ${CMAKE_CURRENT_BINARY_DIR}/luacmd.lua
+    COMMAND ${LUA_BINARY} -b -n luacmd ${CMAKE_CURRENT_BINARY_DIR}/luacmd.lua ${CMAKE_CURRENT_BINARY_DIR}/luacmd.o
 )
 
-add_custom_target(luacmdTool ALL
-    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/luacmd
-)
+include_directories(${LUA_INCLUDE_DIR})
+add_executable(luacmd src/main.c ${CMAKE_CURRENT_BINARY_DIR}/luacmd.o)
+target_link_libraries(luacmd
+    ${CMAKE_DL_LIBS} ${LUA_LIBRARY} ${PCRE_PCRE_LIBRARY})
+set_target_properties(luacmd PROPERTIES
+    ENABLE_EXPORTS true)
 
 install(PROGRAMS ${CMAKE_BINARY_DIR}/luacmd DESTINATION bin)
 

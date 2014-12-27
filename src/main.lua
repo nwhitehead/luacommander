@@ -1,5 +1,17 @@
 require('boot')
 
+-- Check if string starts with another string (no patterns)
+function startswith(s, x)
+    return s:sub(1, #x) == x
+end
+
+function lchomp(s, prefix)
+    if startswith(s, prefix) then
+        return s:sub(#prefix + 1, -1)
+    end
+    return s
+end
+
 function report(result, err)
     if not status and err ~= nil then
         error(err)
@@ -45,7 +57,7 @@ function main(args)
     end
     local exprEndF
     if exprEnd then
-        exprEndF, err = loadstring(string.format('return function() %s end', exprEnd), '@[expressionEnd]')
+        exprEndF, err = loadstring(string.format('return function() %s end', exprEnd), '=[expressionEnd]')
         report(exprF, err)
         exprEndF = exprEndF()
     end
@@ -58,11 +70,7 @@ end
 function errorHandler(err)
     if err then
         -- Try to simplify message to not include compiler file
-        local pat = string.format([[%s:\d+:]], arg[0])
-        s, e = re.find(err, pat)
-        if s then
-            err = string.sub(err, e + 2, -1)
-        end
+        err = lchomp(err, [[[string "luacmd"]:0: ]])
     end
     print(err)
     -- No stacktrace

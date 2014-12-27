@@ -16,7 +16,7 @@ set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(PCRE REQUIRED)
 
 ExternalProject_Add(project_luajit
-  URL http://luajit.org/download/LuaJIT-2.0.3.tar.gz
+  URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE 1
@@ -44,13 +44,14 @@ add_custom_command(
 
 include_directories(${LUA_INCLUDE_DIR})
 set(LREX_SRC
-    external/lrexlib/src/common.c
-    external/lrexlib/src/pcre/lpcre.c
-    external/lrexlib/src/pcre/lpcre_f.c
+    external/lrexlib-2.7.2/src/common.c
+    external/lrexlib-2.7.2/src/pcre/lpcre.c
+    external/lrexlib-2.7.2/src/pcre/lpcre_f.c
 )
 add_definitions(-DVERSION=\"2.7.1\")
 add_definitions(-DREX_OPENLIB=luaopen_librex)
 add_library(rex STATIC ${LREX_SRC})
+add_dependencies(rex project_luajit)
 target_link_libraries(rex ${PCRE_LIBRARIES})
 add_executable(luacmd src/main.c ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c)
 
@@ -63,7 +64,6 @@ target_link_libraries(luacmd
     ${LUA_LIBRARY}
     ${CMAKE_DL_LIBS}
     ${CMAKE_MATH_LIBS}
-#    ${PCRE_LIBRARIES}
 )
 set_target_properties(luacmd PROPERTIES
     ENABLE_EXPORTS true)

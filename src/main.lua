@@ -49,6 +49,9 @@ function main(args)
         report(exprF, err)
         exprEndF = exprEndF()
     end
+    if not exprF and not exprEndF then
+        error('No expression to evaluate')
+    end
     __process(exprF, exprEndF, lines, printit, irs, crs)
 end
 

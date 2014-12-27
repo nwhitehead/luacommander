@@ -29,7 +29,7 @@ add_custom_command(
     COMMAND ${LUA_BINARY} ${CMAKE_CURRENT_SOURCE_DIR}/tools/combiner.lua ${CMAKE_CURRENT_BINARY_DIR}/header ${LUA_FILES_DIR} > ${CMAKE_CURRENT_BINARY_DIR}/luacmd
 )
 
-add_custom_target(luacmd ALL
+add_custom_target(luacmdTool ALL
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/luacmd
 )
 

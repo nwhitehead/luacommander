@@ -1,4 +1,3 @@
-re=require('rex_pcre')
 inspect=require('inspect')
 
 -- Make print use inspect for tables

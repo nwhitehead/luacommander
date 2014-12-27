@@ -8,7 +8,7 @@ CC = gcc
 CINCLUDE = /usr/local/include/luajit-2.0
 CFLAGS = -O2 ${foreach d, ${CINCLUDE}, -I$d} -fpic -DREGEXVERSION=\"2.7.1\"
 LFLAGS = -lluajit-5.1 -lpcre -ldl -Wl,-E
-REGEXLIB = out/pcre.so
+REGEXLIB = out/librex_pcre.so
 LUA = luajit
 
 all: ${OUTPUT}
@@ -35,6 +35,7 @@ test: ${OUTPUT}
 
 ${REGEXLIB}: ${REGEXOBJS}
 	mkdir -p out/
-	${CC} -shared ${REGEXOBJS} -o ${REGEXLIB}
+	#ar rcs ${REGEXLIB} ${REGEXOBJS}
+	gcc -shared $< -o $@ ${LFLAGS}
 
 .PHONY: all clean test

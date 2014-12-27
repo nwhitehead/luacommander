@@ -20,19 +20,19 @@ ${lua} -e "print('hi')" > ${log}
 echo 'hi' | cmp -b - ${log} || die "1"
 
 # Test simple error
-${lua} -e "1" > ${log} 2>&1
-echo "luacmd: [string \"expression\"]:1: unexpected symbol near '1'" \
+${lua} -e "1" > ${log} 2>&1 || true
+echo "[expression]:1: unexpected symbol near '1'" \
     | cmp -b - ${log} || die "2"
-${lua} -n -z "1" > ${log} 2>&1
-echo "luacmd: [string \"expressionEnd\"]:1: unexpected symbol near '1'" \
+${lua} -n -z "1" > ${log} 2>&1 || true
+echo "[expressionEnd]:1: unexpected symbol near '1'" \
     | cmp -b - ${log} || die "3"
 
 # Test dynamic error
-${lua} -e "error(1)" > ${log} 2>&1
-echo "luacmd: [string \"expression\"]:1: 1" \
+${lua} -e "error(1)" > ${log} 2>&1 || true
+echo "[expression]:1: 1" \
     | cmp -n 35 -b - ${log} || die "4"
 ${lua} -n -e "" -z "error(1)" < /dev/null > ${log} 2>&1
-echo "luacmd: [string \"expressionEnd\"]:1: 1" \
+echo "[expressionEnd]:1: 1" \
     | cmp -n 35 -b - ${log} || die "5"
 
 # Test inspect module correctly loaded
@@ -94,3 +94,5 @@ echo -n -e "127.0.0.1\tlocalhost\n127.0.0.1\tlocalhost\n168.192.2.100\tserver\n"
     -z "for k, v in reversesorted(x) do print(k .. ' ' .. v) end" > ${log}
 echo -n -e "127.0.0.1 2\n168.192.2.100 1\n" | \
     cmp -b - ${log} || die "17"
+
+echo "runtests.sh finished successfully"

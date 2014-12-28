@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 project(luacmd)
 
-set (luacmd_VERSION_MAJOR 1)
+set (luacmd_VERSION_MAJOR 0)
 set (luacmd_VERSION_MINOR 0)
+set (luacmd_VERSION_PATCH 3)
 
 include(ExternalProject)
 
@@ -132,8 +133,12 @@ add_custom_target(unittest
 
 include (InstallRequiredSystemLibraries)
 
-set (CPACK_RESOURCE_FILE_LICENSE  
-     "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set (CPACK_PACKAGE_VERSION_MAJOR "${luacmd_VERSION_MAJOR}")
 set (CPACK_PACKAGE_VERSION_MINOR "${luacmd_VERSION_MINOR}")
+set (CPACK_PACKAGE_VERSION_PATCH "${luacmd_VERSION_PATCH}")
+set (CPACK_PACKAGE_VENDOR "Nathan Whitehead")
+set (CPACK_PACKAGE_EXECUTABLES "luacmd" "LuaCommand")
 include (CPack)
+

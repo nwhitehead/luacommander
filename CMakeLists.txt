@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(luacmd)
+
+set (luacmd_VERSION_MAJOR 1)
+set (luacmd_VERSION_MINOR 0)
+
 include(ExternalProject)
 
 FUNCTION(PREPEND var prefix)
@@ -119,3 +123,12 @@ add_custom_target(test
     COMMAND chmod a+x ${CMAKE_CURRENT_BINARY_DIR}/luacmd
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/runtests.sh ${CMAKE_CURRENT_BINARY_DIR}/luacmd
 )
+
+
+include (InstallRequiredSystemLibraries)
+
+set (CPACK_RESOURCE_FILE_LICENSE  
+     "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set (CPACK_PACKAGE_VERSION_MAJOR "${luacmd_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${luacmd_VERSION_MINOR}")
+include (CPack)

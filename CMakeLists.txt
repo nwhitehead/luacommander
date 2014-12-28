@@ -15,7 +15,6 @@ set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set(ljpre ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3)
 set(ljsrc ${ljpre}/src/project_luajit/src)
-add_library(luajit STATIC IMPORTED)
 if(UNIX)
     ExternalProject_Add(project_luajit
       URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
@@ -43,6 +42,7 @@ else(UNIX)
     )
     set (ljname lua51.lib)
 endif(UNIX)
+add_library(luajit STATIC IMPORTED)
 set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${ljpre}/${ljname})
 add_dependencies(luajit project_luajit)
 ExternalProject_Get_Property(project_luajit source_dir)

@@ -13,8 +13,6 @@ ENDFUNCTION(PREPEND)
 
 set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(PCRE REQUIRED)
-
 ExternalProject_Add(project_luajit
   URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3
@@ -42,6 +40,18 @@ add_custom_command(
     COMMAND ${LUA_BINARY} -b -n luacmd ${CMAKE_CURRENT_BINARY_DIR}/luacmd.lua ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c
 )
 
+ExternalProject_Add(project_pcre
+  URL ${CMAKE_CURRENT_SOURCE_DIR}/external/pcre-8.36.tar.gz
+  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/pcre-8.36
+  CMAKE_ARGS
+  INSTALL_COMMAND ""
+)
+ExternalProject_Get_Property(project_pcre binary_dir)
+add_library(pcre STATIC IMPORTED)
+set_property(TARGET pcre PROPERTY IMPORTED_LOCATION ${binary_dir}/libpcre.a)
+add_dependencies(pcre project_pcre)
+
+
 include_directories(${LUA_INCLUDE_DIR})
 set(LREX_SRC
     external/lrexlib-2.7.2/src/common.c
@@ -52,9 +62,8 @@ add_definitions(-DVERSION=\"2.7.1\")
 add_definitions(-DREX_OPENLIB=luaopen_librex)
 add_library(rex STATIC ${LREX_SRC})
 add_dependencies(rex project_luajit)
-target_link_libraries(rex ${PCRE_LIBRARIES})
+target_link_libraries(rex pcre)
 add_executable(luacmd src/main.c ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c)
-
 
 
 set(CMAKE_MATH_LIBS m)
@@ -69,10 +78,8 @@ set_target_properties(luacmd PROPERTIES
     ENABLE_EXPORTS true)
 
 
-
 install(TARGETS luacmd
-    RUNTIME DESTINATION bin
-    LIBRARY DESTINATION lib)
+    RUNTIME DESTINATION bin)
 
 add_custom_target(test
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/DESIGN DESIGN

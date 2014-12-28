@@ -1,4 +1,13 @@
-inspect=require('inspect')
+inspect = require('inspect')
+
+-- Remember original functions
+old = {
+    print=print,
+    table={
+        pack=table.pack,
+        unpack=table.unpack,
+    },
+}
 
 -- Make print use inspect for tables
 function print(...)
@@ -23,6 +32,9 @@ end
 -- Polyfill pack and unpack
 table.unpack = table.unpack or unpack
 table.pack = table.pack or function(...) return {...} end
+
+-- Limit number of return values of function (e.g. for print)
+function one(x) return x end
 
 -- Iterate over a table following a comparison function
 -- Comparison can look at keys and values of both spots
@@ -56,7 +68,6 @@ end
 function reverseordered(tbl)
     return ordered(tbl, function(x, y) return y < x end)
 end
-
 
 -- Iterate over elements in table by ordering on value
 function sorted(tbl, f)
@@ -99,33 +110,8 @@ function values(iter, s0, i)
     return array(iter, s0, i, function(k, v) return v end)
 end
 
--- Find a pattern in a string
--- Try to keep backwards compatibility option
-local old_string_find = string.find
-function string.find(str, pattern, index, opts)
-    if opts == true or opts == false then
-        return old_string_find(str, pattern, index, opts)
-    end
-    return re.find(str, pattern, index, opts)
-end
-
--- Match pattern once
-function string.match(str, pattern, index, opts)
-    return re.match(str, pattern, index, opts)
-end
-
--- Match pattern as a Lua iterator (for generic 'for' loop)
-function string.gmatch(str, pattern)
-    return re.gmatch(str, pattern)
-end
-
--- Count number of occurrences of a regex
-function string.count(str, pattern)
-    return re.count(str, pattern)
-end
-
 -- Split a string based on a delimeter
-function string.split(str, delim, opts)
+function re.gsplit(str, delim, opts)
     local result = {}
     for m in re.split(str, delim, opt) do
         result[#result + 1] = m

@@ -42,12 +42,12 @@ luacmd -n -e "x=(x or 0)+1" -z "print(x or 0)"
 
 Only print lines that start with a hash or two slashes:
 ```
-luacmd -n -e "if(string.find(_, '(^#)|(^//)')) then print(_) end" FILE
+luacmd -n -e "if(re.find(_, '(^#)|(^//)')) then print(_) end" FILE
 ```
 
 Count the number of lines that do not start with a hash:
 ```
-luacmd -n -e "if(not string.find(_, '^#')) then x=(x or 0)+1 end" \
+luacmd -n -e "if(not re.find(_, '^#')) then x=(x or 0)+1 end" \
           -z "print(x)" FILE
 ```
 

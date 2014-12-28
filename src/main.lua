@@ -1,21 +1,53 @@
 require('boot')
 
 -- Check if string starts with another string (no patterns)
-function startswith(s, x)
+local function startswith(s, x)
     return s:sub(1, #x) == x
 end
 
-function lchomp(s, prefix)
+-- Remove prefix string if present
+local function lchomp(s, prefix)
     if startswith(s, prefix) then
         return s:sub(#prefix + 1, -1)
     end
     return s
 end
 
-function report(result, err)
+-- Report errors from protected calls
+local function report(result, err)
     if not status and err ~= nil then
         error(err)
     end
+end
+
+-- Check if file exists
+local function fileExists(name)
+    local f = io.open(name, 'r')
+    if f ~= nil then
+        io.close(f)
+        return true
+    end
+    return false
+end
+
+-- Iterator that generates backup filenames
+-- Suffix should include %n for numbering
+-- Suffix may include %- for optional dashes (removed for n=0)
+-- Iterator returns (number, filename)
+local function backupNames(file, suffix)
+    function f(_, n)
+        local suffixR = suffix
+        if n > 1000 then return end
+        if n > 0 then
+            suffixR = suffixR:gsub('%%n', tostring(n))
+            suffixR = suffixR:gsub('%%%-', '-')
+        else
+            suffixR = suffixR:gsub('%%n', '')
+            suffixR = suffixR:gsub('%%%-', '')
+        end
+        return n + 1, file .. suffixR
+    end
+    return f, nil, 0
 end
 
 -- Main processing function
@@ -23,7 +55,7 @@ end
 -- lines is boolean, should we run on every line of stdin?
 -- irs is input record separator (newline by default)
 -- crs is column record separator (any amount of whitespace by default)
-function __process(f, lines, printit, irs, crs)
+local function __process(f, lines, printit, irs, crs)
     irs = irs or [[\n]]
     crs = crs or [[\s+]]
     _IRS = irs
@@ -33,7 +65,7 @@ function __process(f, lines, printit, irs, crs)
         if irs == [[\n]] then
             -- IRS is newline, can use lines()
             for _ in io.lines() do
-                local _F = string.split(_, crs)
+                local _F = re.gsplit(_, crs)
                 if f then f(_, _F, _ln) end
                 if printit then print(_) end
                 _ln = _ln + 1
@@ -41,8 +73,8 @@ function __process(f, lines, printit, irs, crs)
         else
             -- IRS is not newline, read all file then split
             local data = io.read('*a')
-            for k, _ in pairs(string.split(data, irs)) do
-                local _F = string.split(_, crs)
+            for k, _ in pairs(re.gsplit(data, irs)) do
+                local _F = re.gsplit(_, crs)
                 if f then f(_, _F, _ln) end
                 if printit then print(_) end
                 _ln = _ln + 1
@@ -57,17 +89,17 @@ function __process(f, lines, printit, irs, crs)
 end
 
 -- End of input processing function
-function __processEnd(fEnd, _ln)
+local function __processEnd(fEnd, _ln)
     if fEnd then
         fEnd(_ln)
     end
 end
 
-function main(args)
+local function main(args)
     local lines = false
     local printit = false
     local overwrite = false
-    local backupSuffix = '.bak'
+    local backupSuffix = '.bak%-%n'
     local irs = nil
     local crs = nil
     local expr = nil
@@ -127,19 +159,50 @@ function main(args)
         error('No expression to evaluate')
     end
     if #files == 0 then
+        if overwrite then
+            error('Cannot overwrite standard input')
+        end
         local _ln = __process(exprF, lines, printit, irs, crs)
         __processEnd(exprEndF, _ln)
     else
         local _ln = 0
         for _, file in ipairs(files) do
-            io.input(file)
+            if overwrite then
+                -- Read contents of file
+                local fin = io.open(file, 'r')
+                local data = fin:read('*a')
+                fin:close()
+                -- Save backup
+                local foutname = nil
+                for _, testname in backupNames(file, backupSuffix) do
+                    if not fileExists(testname) then
+                        foutname = testname
+                        break
+                    end
+                end
+                if not foutname then
+                    error('Could not find unused name for backup file ' .. file)
+                end
+                local fout = io.open(foutname, 'w')
+                fout:write(data)
+                fout:close()
+                -- Setup default intput and output
+                io.input(io.open(foutname, 'r'))
+                io.output(io.open(file, 'w'))
+            else
+                io.input(file)
+            end
             _ln = __process(exprF, lines, printit, irs, crs)
+            io.input():close()
+            io.output():close()
         end
+        io.input(io.stdin)
+        io.output(io.stdout)
         __processEnd(exprEndF, _ln)
     end
 end
 
-function errorHandler(err)
+local function errorHandler(err)
     if err then
         -- Try to simplify message to not include compiler file
         err = lchomp(err, [[[string "luacmd"]:0: ]])

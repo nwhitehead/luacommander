@@ -61,6 +61,11 @@ Print second column in text file with fields separated by colons:
 luacmd -n -F ":" -e "print(_F[2])" < FILE
 ```
 
+Prepend line numbers to a file:
+```
+luacmd -n -e "print(string.format('%d:%s', _ln, _))" < FILE
+```
+
 ## Usage Notes
 
 Input is always read from standard input unless redirected from the shell.

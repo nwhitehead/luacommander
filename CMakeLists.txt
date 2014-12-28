@@ -45,6 +45,7 @@ else(UNIX)
       COMMAND ${CMAKE_COMMAND} -E copy_directory ${ljsrc}/jit ${ljpre}/lua/jit
     )
     set (ljname lua51.lib)
+    set (ljdllname lua51.dll)
 endif(UNIX)
 add_library(luajit STATIC IMPORTED)
 set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${ljpre}/${ljname})
@@ -117,8 +118,12 @@ set_target_properties(luacmd PROPERTIES
 
 install(TARGETS luacmd
     RUNTIME DESTINATION bin)
-
-add_custom_target(test
+if(UNIX)
+else(UNIX)
+install(FILES ${ljpre}/${ljdllname}
+	DESTINATION bin)
+endif(UNIX)
+add_custom_target(unittest
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/DESIGN DESIGN
     COMMAND chmod a+x ${CMAKE_CURRENT_BINARY_DIR}/luacmd
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/runtests.sh ${CMAKE_CURRENT_BINARY_DIR}/luacmd

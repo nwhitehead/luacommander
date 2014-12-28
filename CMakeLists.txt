@@ -136,9 +136,9 @@ include (InstallRequiredSystemLibraries)
 # All platforms get ZIP file
 set (CPACK_GENERATOR ZIP)
 # Windows gets custom installer
-if(WIN)
+if(WIN32)
     set (CPACK_GENERATOR ${CPACK_GENERATOR} NSIS)
-endif(WIN)
+endif(WIN32)
 
 set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")

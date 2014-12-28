@@ -12,8 +12,9 @@ die()
 }
 
 lua=$1
-log=out/log
-mkdir -p out
+out=out
+log=${out}/log
+mkdir -p ${out}
 
 # Test simple evaluation
 ${lua} -e "print('hi')" > ${log}
@@ -101,3 +102,11 @@ echo -n -e "abc\ndef\n" | \
 echo -n -e "1\n2\n" | cmp -b - ${log} || die "18"
 
 echo "runtests.sh finished successfully"
+
+# Test file arguments
+echo -n -e "abc\def\n" > ${out}/file1
+echo -n -e "ghi\n" > ${out}/file2
+${lua} -n -e "i = (i or 0) + 1" -z "print(i)" ${out}/file1 > ${log}
+echo -n -e "1\n" | cmp -b - ${log} || die "19"
+${lua} -n -e "i = (i or 0) + 1" -z "print(i)" ${out}/file1 ${out}/file2 > ${log}
+echo -n -e "1\n2\n" | cmp -b - ${log} || die "20"

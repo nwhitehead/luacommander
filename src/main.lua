@@ -65,29 +65,42 @@ function main(args)
     local crs = nil
     local expr = nil
     local exprEnd = nil
+    local allowFlags = true
+    local files = {}
     local i = 1
     while i <= #args do
         v = args[i]
         i = i + 1
-        if v == '-e' then
-            expr = args[i]
-            i = i + 1
-        else if v == '-z' then
-            exprEnd = args[i]
-            i = i + 1
-        else if v == '-n' then
-            lines = true
-        else if v == '-p' then
-            printit = true
-        else if v == '-F' then
-            crs = args[i]
-            i = i + 1
-        else if v == '-I' then
-            irs = args[i]
-            i = i + 1
-        else
-            error('Unknown option ' .. v)
-        end end end end end end
+        if allowFlags then
+            if v == '-e' then
+                expr = args[i]
+                i = i + 1
+            else if v == '-z' then
+                exprEnd = args[i]
+                i = i + 1
+            else if v == '-n' then
+                lines = true
+            else if v == '-p' then
+                printit = true
+            else if v == '-F' then
+                crs = args[i]
+                i = i + 1
+            else if v == '-I' then
+                irs = args[i]
+                i = i + 1
+            else
+                if v:sub(1,1) == '-' then
+                    error('Unknown option ' .. v)
+                end
+                files[#files + 1] = v
+                allowFlags = false
+            end
+        end end end end end else
+            if v:sub(1,1) == '-' then
+                error('No more options allowed after filename (' .. v .. ')')
+            end
+            files[#files + 1] = v
+        end
     end
     local exprF
     if expr then
@@ -104,7 +117,14 @@ function main(args)
     if not exprF and not exprEndF then
         error('No expression to evaluate')
     end
-    __process(exprF, exprEndF, lines, printit, irs, crs)
+    if #files == 0 then
+        __process(exprF, exprEndF, lines, printit, irs, crs)
+    else
+        for _, file in ipairs(files) do
+            io.input(file)
+            __process(exprF, exprEndF, lines, printit, irs, crs)
+        end
+    end
 end
 
 function errorHandler(err)

@@ -13,29 +13,41 @@ ENDFUNCTION(PREPEND)
 
 set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+add_library(luajit STATIC IMPORTED)
+set(ljpre ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3)
+set(ljsrc ${ljpre}/src/project_luajit/src)
 if(UNIX)
-	message(FIXME)
+    ExternalProject_Add(project_luajit
+      URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
+      PREFIX ${ljpre}
+      CONFIGURE_COMMAND ""
+      BUILD_IN_SOURCE 1
+      BUILD_COMMAND make -j8
+      INSTALL_COMMAND ""
+      COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/luajit ${ljpre}
+      COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/libluajit.a ${ljpre}
+    )
+    set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${ljpre}/libluajit.a)
 else(UNIX)
-ExternalProject_Add(project_luajit
-  URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
-  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3
-  CONFIGURE_COMMAND ""
-  BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src
-  BUILD_COMMAND ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/msvcbuild.bat
-  INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/luajit.exe ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/lua51.dll ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/lua51.lib ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/
-  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/jit ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/lua/jit
-)
+    ExternalProject_Add(project_luajit
+      URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
+      PREFIX ${ljpre}
+      CONFIGURE_COMMAND ""
+      BINARY_DIR ${ljsrc}
+      BUILD_COMMAND ${ljsrc}/msvcbuild.bat
+      INSTALL_COMMAND ""
+      COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/luajit.exe ${ljpre}
+      COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/lua51.dll ${ljpre}
+      COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/lua51.lib ${ljpre}
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${ljsrc}/jit ${ljpre}
+    )
+    set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${ljpre}/lua51.lib)
 endif(UNIX)
 
-ExternalProject_Get_Property(project_luajit prefix)
-ExternalProject_Get_Property(project_luajit source_dir)
-add_library(luajit STATIC IMPORTED)
-set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${prefix}/lua51.lib)
 add_dependencies(luajit project_luajit)
+ExternalProject_Get_Property(project_luajit source_dir)
 set(LUA_INCLUDE_DIR ${source_dir}/src)
-set(LUA_BINARY ${prefix}/luajit.exe)
+set(LUA_BINARY ${ljpre}/luajit)
 
 set(LUA_FILES src/inspect.lua src/boot.lua src/main.lua)
 prepend(LUA_FILES_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${LUA_FILES})

@@ -11,6 +11,8 @@ LUALIB_API int luaopen_librex(lua_State *L);
 
 int main(int argc, char *argv[]) {
     int i;
+    char *cmd;
+    int status;
     lua_State *L = lua_open();
     if (L == NULL) {
         printf("cannot create state: not enough memory\n");
@@ -35,8 +37,8 @@ int main(int argc, char *argv[]) {
     }
     lua_setglobal(L, "arg");
 
-    char *cmd = "require('luacmd')";
-    int status = luaL_loadbuffer(L, cmd, strlen(cmd), "=bootstrap");
+    cmd = "require('luacmd')";
+    status = luaL_loadbuffer(L, cmd, strlen(cmd), "=bootstrap");
     lua_call(L, 0, LUA_MULTRET);
 
     lua_close(L);

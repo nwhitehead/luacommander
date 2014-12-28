@@ -13,22 +13,29 @@ ENDFUNCTION(PREPEND)
 
 set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+if(UNIX)
+	message(FIXME)
+else(UNIX)
 ExternalProject_Add(project_luajit
   URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3
   CONFIGURE_COMMAND ""
-  BUILD_IN_SOURCE 1
-  BUILD_COMMAND make -j8
-  INSTALL_COMMAND make install PREFIX=${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3
+  BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src
+  BUILD_COMMAND ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/msvcbuild.bat
+  INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/luajit.exe ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/
+  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/lua51.dll ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/
+  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/lua51.lib ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/src/project_luajit/src/jit ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3/lua/jit
 )
-ExternalProject_Get_Property(project_luajit install_dir)
+endif(UNIX)
+
+ExternalProject_Get_Property(project_luajit prefix)
 ExternalProject_Get_Property(project_luajit source_dir)
 add_library(luajit STATIC IMPORTED)
-set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${install_dir}/lib/libluajit.a)
+set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${prefix}/lua51.lib)
 add_dependencies(luajit project_luajit)
-set(LUA_INCLUDE_DIR ${install_dir}/include/luajit-2.0)
-set(LUA_BINARY ${install_dir}/bin/luajit-2.0.3)
-set(LUA_LIBRARY ${install_dir}/lib/libluajit-5.1.a)
+set(LUA_INCLUDE_DIR ${source_dir}/src)
+set(LUA_BINARY ${prefix}/luajit.exe)
 
 set(LUA_FILES src/inspect.lua src/boot.lua src/main.lua)
 prepend(LUA_FILES_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${LUA_FILES})
@@ -48,9 +55,14 @@ ExternalProject_Add(project_pcre
 )
 ExternalProject_Get_Property(project_pcre binary_dir)
 add_library(pcre STATIC IMPORTED)
-set_property(TARGET pcre PROPERTY IMPORTED_LOCATION ${binary_dir}/libpcre.a)
+if(UNIX)
+	set (PCRE_LIB ${binary_dir}/libpcre.a)
+else(UNIX)
+	set (PCRE_LIB ${binary_dir}/pcred.lib)
+endif(UNIX)
+set_property(TARGET pcre PROPERTY IMPORTED_LOCATION ${PCRE_LIB})
 add_dependencies(pcre project_pcre)
-
+include_directories(${binary_dir})
 
 include_directories(${LUA_INCLUDE_DIR})
 set(LREX_SRC
@@ -60,20 +72,25 @@ set(LREX_SRC
 )
 add_definitions(-DVERSION=\"2.7.1\")
 add_definitions(-DREX_OPENLIB=luaopen_librex)
+add_definitions(-DPCRE_STATIC)
 add_library(rex STATIC ${LREX_SRC})
 add_dependencies(rex project_luajit)
 target_link_libraries(rex pcre)
+
 add_executable(luacmd src/main.c ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c)
 if(APPLE)
 	# 64-bit Mac OS X requires special flags to free up low 32-bit addresses for GC
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pagezero_size 10000 -image_base 100000000")
 endif(APPLE)
 
-set(CMAKE_MATH_LIBS m)
+if(UNIX)
+	set(CMAKE_MATH_LIBS m)
+endif(UNIX)
 
 target_link_libraries(luacmd
+    pcre
     rex
-    ${LUA_LIBRARY}
+    luajit
     ${CMAKE_DL_LIBS}
     ${CMAKE_MATH_LIBS}
 )

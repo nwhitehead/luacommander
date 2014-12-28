@@ -121,7 +121,8 @@ set_target_properties(luacmd PROPERTIES
 include (InstallRequiredSystemLibraries)
 
 install(TARGETS luacmd
-    RUNTIME DESTINATION bin)
+    RUNTIME DESTINATION bin
+    COMPONENT Executable)
 if(UNIX)
 else(UNIX)
 install(FILES ${ljpre}/${ljdllname}

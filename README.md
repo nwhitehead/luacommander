@@ -15,12 +15,6 @@ Some of the features:
 * Automatically splits lines into fields with a programmable field separator
 * Handy iterators predefined for common tasks (order by keys, order by values)
 
-## Requirements
-
-* LuaJIT 2.0+ (available at http://luajit.org)
-* PCRE (available at http://pcre.org)
-* lrex-pcre (available from http://luarocks.org)
-
 ## Examples
 
 Here are some simple example demonstrating how to use Lua Commander.
@@ -65,6 +59,17 @@ Prepend line numbers to a file:
 ```
 luacmd -n -e "print(string.format('%d:%s', _ln, _))" FILE
 ```
+
+## Get It Now
+
+No need to hassle with building. Lua Commander is available in
+binary packages for the following platforms:
+* Linux x86_64
+* Mac OS X (10.9 and later)
+* Windows 64-bit
+
+Get the latest releases here
+(https://github.com/nwhitehead/luacommander/releases/latest).
 
 ## Usage Notes
 
@@ -121,3 +126,42 @@ return values may start with `false` for a choice not matched. If you
 want to detect whether a match occurred at all the function `string.find`
 should be used because it will always return a truthy value on successful
 match.
+
+## Build Requirements
+
+To build from source you need CMake (available from http://www.cmake.org).
+You need a platform with working compiler that supports LuaJIT 2.0+
+(see http://luajit.org). For Linux and Mac OS X this should
+be easy. For Windows the supported compiler is the Windows SDK command-line
+tools based on Visual Studio 2010. The build also depends on PCRE
+(documentation at http://pcre.org) which should be supported by all platforms.
+
+### Linux and Mac OS X Build Instructions
+
+Get a copy of the source. Create a build directory named `build`, it may
+be inside your source directory of somewhere else. From `build` run
+`cmake SOURCEDIR` giving the path to the source directory. Then run
+`make`. To install locally you can do `sudo make install`. To build
+distribution packages do `cpack`.
+
+### Windows Build Instructions
+
+(Currently only Windows 64-bit is supported).
+
+First make sure you have either Visual Studio installed or the Microsoft
+Windows SDK for Windows 7 (available at http://www.microsoft.com/en-us/download/details.aspx?id=8279).
+You will also need to install the Microsoft Visual C++ 2010 Redistributable
+package (available at http://www.microsoft.com/en-us/download/details.aspx?id=14632).
+Install CMake (available at http://www.cmake.org).
+
+Get a copy of the source. Create a build directory named `build`, either
+inside your source tree or somewhere else. Using the Windows SDK Command
+Prompt, run `setenv /release` to set the build environment to release mode.
+This should change the font from yellow to green.
+From the command prompt, navigate to `build` and run
+`cmake SOURCEDIR -G"NMake Makefiles"`. This will generate makefiles
+suitable for Microsoft's NMake tool. Run `nmake` to do the build.
+
+To build the binary Windows installer, install NSIS (available at 
+http://nsis.sourceforge.net). Then run `cpack` from the `build`
+directory to create the installer and zip archive.

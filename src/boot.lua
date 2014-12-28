@@ -132,39 +132,3 @@ function string.split(str, delim, opts)
     end
     return result
 end
-
--- Main processing function
--- f is -e user function
--- fend is -z end function
--- lines is boolean, should we run on every line of stdin?
--- irs is input record separator (newline by default)
--- crs is column record separator (any amount of whitespace by default)
-function __process(f, fend, lines, printit, irs, crs)
-    irs = irs or [[\n]]
-    crs = crs or [[\s+]]
-    _IRS = irs
-    _CRS = crs
-    if lines then
-        if irs == [[\n]] then
-            -- IRS is newline, can use lines()
-            for _ in io.lines() do
-                local _F = string.split(_, crs)
-                if f then f(_, _F) end
-                if printit then print(_) end
-            end
-        else
-            -- IRS is not newline, read all file then split
-            local data = io.read('*a')
-            for k, _ in pairs(string.split(data, irs)) do
-                local _F = string.split(_, crs)
-                if f then f(_, _F) end
-                if printit then print(_) end
-            end
-        end
-        if fend then fend() end
-        return
-    end
-    -- No lines handling
-    if f then f() end
-    if fend then fend() end
-end

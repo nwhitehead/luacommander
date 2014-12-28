@@ -61,7 +61,7 @@ set(LUA_FILES src/inspect.lua src/boot.lua src/main.lua)
 prepend(LUA_FILES_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${LUA_FILES})
 
 add_custom_command(
-    DEPENDS project_luajit
+    DEPENDS project_luajit ${LUA_FILES_DIR}
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c
     COMMAND ${LUA_BINARY} ${CMAKE_CURRENT_SOURCE_DIR}/tools/combiner.lua ${LUA_FILES_DIR} > ${CMAKE_CURRENT_BINARY_DIR}/luacmd.lua
     COMMAND ${LUA_BINARY} -b -n luacmd ${CMAKE_CURRENT_BINARY_DIR}/luacmd.lua ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c

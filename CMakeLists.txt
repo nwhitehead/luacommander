@@ -6,6 +6,8 @@ set (luacmd_VERSION_MAJOR 0)
 set (luacmd_VERSION_MINOR 0)
 set (luacmd_VERSION_PATCH 3)
 
+set (CMAKE_CXX_FLAGS "/MT")
+
 include(ExternalProject)
 
 FUNCTION(PREPEND var prefix)
@@ -116,13 +118,21 @@ target_link_libraries(
 set_target_properties(luacmd PROPERTIES
     ENABLE_EXPORTS true)
 
+include (InstallRequiredSystemLibraries)
 
 install(TARGETS luacmd
     RUNTIME DESTINATION bin)
 if(UNIX)
 else(UNIX)
 install(FILES ${ljpre}/${ljdllname}
-	DESTINATION bin)
+	DESTINATION bin
+	COMPONENT Libraries)
+INSTALL(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
+	DESTINATION bin
+	COMPONENT Libraries)
+INSTALL(FILES C:/Windows/SysWOW64/msvcr100.dll
+	DESTINATION bin
+	COMPONENT Libraries)
 endif(UNIX)
 add_custom_target(unittest
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/DESIGN DESIGN
@@ -131,7 +141,15 @@ add_custom_target(unittest
 )
 
 
-include (InstallRequiredSystemLibraries)
+foreach(flag_var
+        CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+        CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+   if(${flag_var} MATCHES "/MD")
+      string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
+   endif(${flag_var} MATCHES "/MD")
+endforeach(flag_var)
+
+
 
 # All platforms get ZIP file
 set (CPACK_GENERATOR ZIP)
@@ -147,5 +165,7 @@ set (CPACK_PACKAGE_VERSION_MINOR "${luacmd_VERSION_MINOR}")
 set (CPACK_PACKAGE_VERSION_PATCH "${luacmd_VERSION_PATCH}")
 set (CPACK_PACKAGE_VENDOR "Nathan Whitehead")
 set (CPACK_PACKAGE_EXECUTABLES "luacmd" "LuaCommand")
+set (CPACK_NSIS_MODIFY_PATH ON)
+
 include (CPack)
 

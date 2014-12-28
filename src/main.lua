@@ -49,7 +49,8 @@ function __process(f, fend, lines, printit, irs, crs)
                 _ln = _ln + 1
             end
         end
-        if fend then fend() end
+        _ln = _ln - 1 -- update to number of lines read
+        if fend then fend(_ln) end
         return
     end
     -- No lines handling
@@ -96,7 +97,7 @@ function main(args)
     end
     local exprEndF
     if exprEnd then
-        exprEndF, err = loadstring(string.format('return function() %s end', exprEnd), '=[expressionEnd]')
+        exprEndF, err = loadstring(string.format('return function(_ln) %s end', exprEnd), '=[expressionEnd]')
         report(exprF, err)
         exprEndF = exprEndF()
     end

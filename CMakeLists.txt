@@ -133,6 +133,13 @@ add_custom_target(unittest
 
 include (InstallRequiredSystemLibraries)
 
+# All platforms get ZIP file
+set (CPACK_GENERATOR ZIP)
+# Windows gets custom installer
+if(WIN)
+    set (CPACK_GENERATOR ${CPACK_GENERATOR} NSIS)
+endif(WIN)
+
 set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set (CPACK_PACKAGE_VERSION_MAJOR "${luacmd_VERSION_MAJOR}")

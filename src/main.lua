@@ -66,6 +66,8 @@ end
 function main(args)
     local lines = false
     local printit = false
+    local overwrite = false
+    local backupSuffix = '.bak'
     local irs = nil
     local crs = nil
     local expr = nil
@@ -93,6 +95,8 @@ function main(args)
             else if v == '-I' then
                 irs = args[i]
                 i = i + 1
+            else if v == '-i' then
+                overwrite = true
             else
                 if v:sub(1,1) == '-' then
                     error('Unknown option ' .. v)
@@ -100,7 +104,7 @@ function main(args)
                 files[#files + 1] = v
                 allowFlags = false
             end
-        end end end end end else
+        end end end end end end else
             if v:sub(1,1) == '-' then
                 error('No more options allowed after filename (' .. v .. ')')
             end
@@ -140,7 +144,7 @@ function errorHandler(err)
         -- Try to simplify message to not include compiler file
         err = lchomp(err, [[[string "luacmd"]:0: ]])
     end
-    print(err)
+    io.stderr:write(err .. '\n')
     -- No stacktrace
 end
 

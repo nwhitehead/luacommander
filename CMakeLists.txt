@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 project(luacmd)
 
 set (luacmd_VERSION_MAJOR 0)
-set (luacmd_VERSION_MINOR 0)
-set (luacmd_VERSION_PATCH 3)
+set (luacmd_VERSION_MINOR 1)
+set (luacmd_VERSION_PATCH 0)
 
 set (CMAKE_CXX_FLAGS "/MT")
 

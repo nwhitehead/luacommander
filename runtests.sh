@@ -95,4 +95,9 @@ echo -n -e "127.0.0.1\tlocalhost\n127.0.0.1\tlocalhost\n168.192.2.100\tserver\n"
 echo -n -e "127.0.0.1 2\n168.192.2.100 1\n" | \
     cmp -b - ${log} || die "17"
 
+# Test line numbering
+echo -n -e "abc\ndef\n" | \
+    ${lua} -n -e "print(_ln)" > ${log}
+echo -n -e "1\n2\n" | cmp -b - ${log} || die "18"
+
 echo "runtests.sh finished successfully"

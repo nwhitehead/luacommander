@@ -64,7 +64,10 @@ add_library(rex STATIC ${LREX_SRC})
 add_dependencies(rex project_luajit)
 target_link_libraries(rex pcre)
 add_executable(luacmd src/main.c ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c)
-
+if(APPLE)
+	# 64-bit Mac OS X requires special flags to free up low 32-bit addresses for GC
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pagezero_size 10000 -image_base 100000000")
+endif(APPLE)
 
 set(CMAKE_MATH_LIBS m)
 

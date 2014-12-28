@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     int i;
     lua_State *L = lua_open();
     if (L == NULL) {
-        printf("cannot create state: not enough memory");
+        printf("cannot create state: not enough memory\n");
         return EXIT_FAILURE;
     }
     LUAJIT_VERSION_SYM();  /* linker-enforced version check */

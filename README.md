@@ -14,6 +14,7 @@ Some of the features:
 * Run code for each line of a file, then run more code to print summary results
 * Automatically splits lines into fields with a programmable field separator
 * Handy iterators predefined for common tasks (order by keys, order by values)
+* Overwrite original files with new output (with backups)
 
 ## Examples
 
@@ -55,9 +56,15 @@ Print second column in text file with fields separated by colons:
 luacmd -n -F ":" -e "print(_F[2])" FILE
 ```
 
-Prepend line numbers to a file:
+Prepend line numbers to a file, show results on standard out:
 ```
 luacmd -n -e "print(string.format('%d:%s', _ln, _))" FILE
+```
+
+Prepend file content with colons, modifying original file while keeping
+backups:
+```
+luacmd -i -n -e "print(':' .. _)" FILE
 ```
 
 ## Get It Now
@@ -119,13 +126,21 @@ The function `keys` converts an iterator into the array of key
 values that are visited by the iterator. The function `values` converts
 an iterator into the array of values that are visited by the iterator.
 
-When using `string.match`, be careful because on a successful match
+When using `re.match`, be careful because on a successful match
 it returns multiple values that represent the way the string matched
 the pattern. If the pattern includes the choice operator `|`, the multiple
 return values may start with `false` for a choice not matched. If you
-want to detect whether a match occurred at all the function `string.find`
+want to detect whether a match occurred at all the function `re.find`
 should be used because it will always return a truthy value on successful
 match.
+
+When using the `-i` option the expression will read a copy of the file
+contents and write back over the original file. Backups are kept of all
+files before modification. If the backup `.bak` filename is taken then
+numbers are used to prevent data loss. Multiple files can be processed
+with `-i` at one time; the expression reads/writes each file in turn.
+If the `-z` option is also given, the final expression reads from standard
+input and writes to standard output.
 
 ## Build Requirements
 

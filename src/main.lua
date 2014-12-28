@@ -20,11 +20,10 @@ end
 
 -- Main processing function
 -- f is -e user function
--- fend is -z end function
 -- lines is boolean, should we run on every line of stdin?
 -- irs is input record separator (newline by default)
 -- crs is column record separator (any amount of whitespace by default)
-function __process(f, fend, lines, printit, irs, crs)
+function __process(f, lines, printit, irs, crs)
     irs = irs or [[\n]]
     crs = crs or [[\s+]]
     _IRS = irs
@@ -50,12 +49,18 @@ function __process(f, fend, lines, printit, irs, crs)
             end
         end
         _ln = _ln - 1 -- update to number of lines read
-        if fend then fend(_ln) end
-        return
+        return _ln
     end
     -- No lines handling
     if f then f() end
-    if fend then fend() end
+    return nil
+end
+
+-- End of input processing function
+function __processEnd(fEnd, _ln)
+    if fEnd then
+        fEnd(_ln)
+    end
 end
 
 function main(args)
@@ -118,12 +123,15 @@ function main(args)
         error('No expression to evaluate')
     end
     if #files == 0 then
-        __process(exprF, exprEndF, lines, printit, irs, crs)
+        local _ln = __process(exprF, lines, printit, irs, crs)
+        __processEnd(exprEndF, _ln)
     else
+        local _ln = 0
         for _, file in ipairs(files) do
             io.input(file)
-            __process(exprF, exprEndF, lines, printit, irs, crs)
+            _ln = __process(exprF, lines, printit, irs, crs)
         end
+        __processEnd(exprEndF, _ln)
     end
 end
 

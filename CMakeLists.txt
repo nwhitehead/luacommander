@@ -13,9 +13,9 @@ ENDFUNCTION(PREPEND)
 
 set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-add_library(luajit STATIC IMPORTED)
 set(ljpre ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3)
 set(ljsrc ${ljpre}/src/project_luajit/src)
+add_library(luajit STATIC IMPORTED)
 if(UNIX)
     ExternalProject_Add(project_luajit
       URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
@@ -27,7 +27,7 @@ if(UNIX)
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/luajit ${ljpre}
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/libluajit.a ${ljpre}
     )
-    set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${ljpre}/libluajit.a)
+    set (ljname libluajit.a)
 else(UNIX)
     ExternalProject_Add(project_luajit
       URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
@@ -39,11 +39,11 @@ else(UNIX)
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/luajit.exe ${ljpre}
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/lua51.dll ${ljpre}
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/lua51.lib ${ljpre}
-      COMMAND ${CMAKE_COMMAND} -E copy_directory ${ljsrc}/jit ${ljpre}
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${ljsrc}/jit ${ljpre}/lua/jit
     )
-    set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${ljpre}/lua51.lib)
+    set (ljname lua51.lib)
 endif(UNIX)
-
+set_property(TARGET luajit PROPERTY IMPORTED_LOCATION ${ljpre}/${ljname})
 add_dependencies(luajit project_luajit)
 ExternalProject_Get_Property(project_luajit source_dir)
 set(LUA_INCLUDE_DIR ${source_dir}/src)
@@ -82,7 +82,7 @@ set(LREX_SRC
     external/lrexlib-2.7.2/src/pcre/lpcre.c
     external/lrexlib-2.7.2/src/pcre/lpcre_f.c
 )
-add_definitions(-DVERSION=\"2.7.1\")
+add_definitions(-DVERSION=\"2.7.2\")
 add_definitions(-DREX_OPENLIB=luaopen_librex)
 add_definitions(-DPCRE_STATIC)
 add_library(rex STATIC ${LREX_SRC})
@@ -99,7 +99,8 @@ if(UNIX)
 	set(CMAKE_MATH_LIBS m)
 endif(UNIX)
 
-target_link_libraries(luacmd
+target_link_libraries(
+	luacmd
     pcre
     rex
     luajit

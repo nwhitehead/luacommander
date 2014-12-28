@@ -109,6 +109,14 @@ echo -n -e "2\n" | cmp -b - ${log} || die "19"
 ${lua} -n -e "i = (i or 0) + 1" -z "print(i)" ${out}/file1 ${out}/file2 > ${log}
 echo -n -e "3\n" | cmp -b - ${log} || die "20"
 
+# Test -i functionality for one file
+rm ${out}/file1*
+echo -n -e "abc\ndef\n" > ${out}/file1
+${lua} -i -n -e "print(':'.. _)" -z "print(3)" ${out}/file1 > ${log}
+echo -n -e "3\n" | cmp -b - ${log} || die "21"
+echo -n -e ":abc\n:def\n" | cmp -b - ${out}/file1 || die "21"
+echo -n -e "abc\ndef\n" | cmp -b - ${out}/file1.bak || die "22"
+
 ####### FINISHED
 echo "runtests.sh finished successfully"
 

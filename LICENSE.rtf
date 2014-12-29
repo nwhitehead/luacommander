@@ -1,0 +1,494 @@
+{\rtf1\ansi\deff3\adeflang1025
+{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset0 Liberation Serif{\*\falt Times New Roman};}{\f4\fswiss\fprq2\fcharset0 Liberation Sans{\*\falt Arial};}{\f5\froman\fprq2\fcharset0 Courier New;}{\f6\fmodern\fprq1\fcharset128 DejaVu Sans Mono;}{\f7\fnil\fprq2\fcharset0 Liberation Serif{\*\falt Times New Roman};}{\f8\fnil\fprq2\fcharset0 Mangal;}{\f9\fnil\fprq0\fcharset128 Mangal;}}
+{\colortbl;\red0\green0\blue0;\red128\green128\blue128;}
+{\stylesheet{\s0\snext0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033 Normal;}
+{\s15\sbasedon0\snext16\ql\nowidctlpar\sb240\sa120\keepn\ltrpar\cf1\kerning1\dbch\af8\langfe1081\dbch\af8\afs28\loch\f4\fs28\lang1033 Heading;}
+{\s16\sbasedon0\snext16\sl288\slmult1\ql\nowidctlpar\sb0\sa140\ltrpar\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\loch\f3\fs24\lang1033 Text Body;}
+{\s17\sbasedon16\snext17\sl288\slmult1\ql\nowidctlpar\sb0\sa140\ltrpar\cf1\kerning1\dbch\af8\langfe1081\dbch\af9\afs24\loch\f3\fs24\lang1033 List;}
+{\s18\sbasedon0\snext18\ql\nowidctlpar\sb120\sa120\noline\ltrpar\cf1\i\kerning1\dbch\af8\langfe1081\dbch\af9\afs24\ai\loch\f3\fs24\lang1033 Caption;}
+{\s19\sbasedon0\snext19\ql\nowidctlpar\noline\ltrpar\cf1\kerning1\dbch\af8\langfe1081\dbch\af9\afs24\loch\f3\fs24\lang1033 Index;}
+}{\info{\creatim\yr2014\mo12\dy28\hr15\min44}{\revtim\yr2014\mo12\dy28\hr16\min4}{\printim\yr0\mo0\dy0\hr0\min0}{\comment LibreOffice}{\vern67305730}}\deftab709
+\viewscale100
+{\*\pgdsctbl
+{\pgdsc0\pgdscuse451\pgwsxn12240\pghsxn15840\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\pgdscnxt0 Default Style;}}
+\formshade{\*\pgdscno0}\paperh15840\paperw12240\margl1134\margr1134\margt1134\margb1134\sectd\sbknone\sectunlocked1\pgndec\pgwsxn12240\pghsxn15840\marglsxn1134\margrsxn1134\margtsxn1134\margbsxn1134\ftnbj\ftnstart1\ftnrstcont\ftnnar\aenddoc\aftnrstcont\aftnstart1\aftnnrlc
+{\*\ftnsep\chftnsep}\pgndec\pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+===============================================================================}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs36\rtlch \ltrch\loch\fs36\lang1033\loch\f6
+Lua Commander - luacmd}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs20\rtlch \ltrch\loch\fs20\lang1033\loch\f6
+Copyright (C) 201}{\cf1\kerning1\dbch\af8\langfe1081\afs20\rtlch \ltrch\loch\fs20\lang1033\loch\f6
+4}{\cf1\kerning1\dbch\af8\langfe1081\afs20\rtlch \ltrch\loch\fs20\lang1033\loch\f6
+ Nathan Whitehead. All rights reserved.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs20\rtlch \ltrch\loch\fs20\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Permission is hereby granted, free of charge, to any person obtaining a copy}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+of this software and associated documentation files (the "Software"), to deal}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+in the Software without restriction, including without limitation the rights}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+copies of the Software, and to permit persons to whom the Software is}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+furnished to do so, subject to the following conditions:}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+The above copyright notice and this permission notice shall be included in}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+all copies or substantial portions of the Software.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+[ MIT license: http://www.opensource.org/licenses/mit-license.php ]}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+===============================================================================}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+[ luacmd includes code from LuaJIT, which has this license statement: ]}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright (C) 2005-2014 Mike Pall. All rights reserved.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Permission is hereby granted, free of charge, to any person obtaining a copy}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+of this software and associated documentation files (the "Software"), to deal}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+in the Software without restriction, including without limitation the rights}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+copies of the Software, and to permit persons to whom the Software is}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+furnished to do so, subject to the following conditions:}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+The above copyright notice and this permission notice shall be included in}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+all copies or substantial portions of the Software.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+[ MIT license: http://www.opensource.org/licenses/mit-license.php ]}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+===============================================================================}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+[ LuaJIT includes code from Lua 5.1/5.2, which has this license statement: ]}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright (C) 1994-2012 Lua.org, PUC-Rio.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Permission is hereby granted, free of charge, to any person obtaining a copy}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+of this software and associated documentation files (the "Software"), to deal}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+in the Software without restriction, including without limitation the rights}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+copies of the Software, and to permit persons to whom the Software is}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+furnished to do so, subject to the following conditions:}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+The above copyright notice and this permission notice shall be included in}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+all copies or substantial portions of the Software.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+===============================================================================}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+[ luacmd includes code from inspect, which has this license statement: ]}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+MIT LICENSE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright (c) 2013 Enrique Garc\u237\'3fa Cota}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Permission is hereby granted, free of charge, to any person obtaining a}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+copy of this software and associated documentation files (the}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+"Software"), to deal in the Software without restriction, including}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+without limitation the rights to use, copy, modify, merge, publish,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+distribute, sublicense, and/or sell copies of the Software, and to}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+permit persons to whom the Software is furnished to do so, subject to}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+the following conditions:}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+The above copyright notice and this permission notice shall be included}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+in all copies or substantial portions of the Software.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+===============================================================================}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+[ luacmd includes code from PCRE, which has this license statement: ]}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+PCRE LICENCE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+------------}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+PCRE is a library of functions to support regular expressions whose syntax}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+and semantics are as close as possible to those of the Perl 5 language.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Release 8 of PCRE is distributed under the terms of the "BSD" licence, as}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+specified below. The documentation for PCRE, supplied in the "doc"}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+directory, is distributed under the same terms as the software itself.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+The basic library functions are written in C and are freestanding. Also}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+included in the distribution is a set of C++ wrapper functions, and a}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+just-in-time compiler that can be used to optimize pattern matching. These}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+are both optional features that can be omitted when the library is built.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE BASIC LIBRARY FUNCTIONS}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+---------------------------}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Written by:       Philip Hazel}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Email local part: ph10}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Email domain:     cam.ac.uk}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+University of Cambridge Computing Service,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Cambridge, England.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright (c) 1997-2014 University of Cambridge}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+All rights reserved.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+PCRE JUST-IN-TIME COMPILATION SUPPORT}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+-------------------------------------}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Written by:       Zoltan Herczeg}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Email local part: hzmester}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Emain domain:     freemail.hu}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright(c) 2010-2014 Zoltan Herczeg}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+All rights reserved.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+STACK-LESS JUST-IN-TIME COMPILER}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+--------------------------------}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Written by:       Zoltan Herczeg}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Email local part: hzmester}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Emain domain:     freemail.hu}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright(c) 2009-2014 Zoltan Herczeg}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+All rights reserved.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE C++ WRAPPER FUNCTIONS}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+-------------------------}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Contributed by:   Google Inc.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright (c) 2007-2012, Google Inc.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+All rights reserved.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE "BSD" LICENCE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+-----------------}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Redistribution and use in source and binary forms, with or without}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+modification, are permitted provided that the following conditions are met:}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+* Redistributions of source code must retain the above copyright notice,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+      }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+this list of conditions and the following disclaimer.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+* Redistributions in binary form must reproduce the above copyright}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+      }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+notice, this list of conditions and the following disclaimer in the}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+      }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+documentation and/or other materials provided with the distribution.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+    }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+* Neither the name of the University of Cambridge nor the name of Google}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+      }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Inc. nor the names of their contributors may be used to endorse or}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+      }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+promote products derived from this software without specific prior}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1033\afs14\rtlch \ltrch\fs14\lang1033\loch\f6
+      }{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+written permission.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+POSSIBILITY OF SUCH DAMAGE.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+End}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+===============================================================================}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+[ luacmd includes code from lrexlib, which has this license statement: ]}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+License of Lrexlib release}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+--------------------------}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright (C) Reuben Thomas 2000-2012}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Copyright (C) Shmuel Zeigerman 2004-2012}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Permission is hereby granted, free of charge, to any person}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+obtaining a copy of this software and associated}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+documentation files (the "Software"), to deal in the}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Software without restriction, including without limitation}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+the rights to use, copy, modify, merge, publish, distribute,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+sublicense, and/or sell copies of the Software, and to}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+permit persons to whom the Software is furnished to do so,}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+subject to the following conditions:}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+The above copyright notice and this permission notice shall}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+be included in all copies or substantial portions of the}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+Software.}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar\cf1\kerning1\dbch\af7\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE}
+\par \pard\plain \s0\ql\nowidctlpar\ltrpar{\*\hyphen2\hyphlead2\hyphtrail2\hyphmax0}\cf1\kerning1\dbch\af7\langfe1081\dbch\af7\afs24\alang1081\loch\f3\fs24\lang1033\ql\nowidctlpar{\cf1\kerning1\dbch\af8\langfe1081\afs14\rtlch \ltrch\loch\fs14\lang1033\loch\f6
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}
+\par }

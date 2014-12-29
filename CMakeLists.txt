@@ -4,7 +4,7 @@ project(luacmd)
 
 set (luacmd_VERSION_MAJOR 0)
 set (luacmd_VERSION_MINOR 1)
-set (luacmd_VERSION_PATCH 2)
+set (luacmd_VERSION_PATCH 3)
 
 if (EXCLUDE_GIT_VERSION)
 else (EXCLUDE_GIT_VERSION)
@@ -155,9 +155,6 @@ install(FILES ${ljpre}/${ljdllname}
 INSTALL(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
 	DESTINATION bin
 	COMPONENT Libraries)
-INSTALL(FILES C:/Windows/System32/msvcr100.dll
-    DESTINATION bin
-    COMPONENT Libraries)
 endif(UNIX)
 add_custom_target(unittest
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/DESIGN DESIGN

@@ -113,6 +113,98 @@ local function __processEnd(fEnd, _ln)
     end
 end
 
+-- getopt, POSIX style command line argument parser
+-- param arg contains the command line arguments in a standard table.
+-- param options is a string with the letters that expect string values.
+-- returns a table where associated keys are true, nil, or a string value.
+-- The following example styles are supported
+--   -a one  ==> opts["a"]=="one"
+--   -bone   ==> opts["b"]=="one"
+--   -c      ==> opts["c"]==true
+--   --c=one ==> opts["c"]=="one"
+--   -cdaone ==> opts["c"]==true opts["d"]==true opts["a"]=="one"
+-- note POSIX demands the parser ends at the first non option
+--      this behavior isn't implemented.
+
+local function getopt(arg, options)
+    local tab = {}
+    for k, v in ipairs(arg) do
+        if string.sub(v, 1, 2) == "--" then
+            local x = string.find(v, "=", 1, true)
+            if x then
+                tab[string.sub(v, 3, x-1)] = string.sub(v, x+1)
+            else
+                tab[string.sub(v, 3)] = true
+            end
+        elseif string.sub(v, 1, 1) == "-" then
+            local y = 2
+            local l = string.len(v)
+            local jopt
+            while (y <= l) do
+                jopt = string.sub(v, y, y)
+                if string.find(options, jopt, 1, true) then
+                    if y < l then
+                        tab[jopt] = string.sub(v, y+1)
+                        y = l
+                    else
+                        tab[jopt ] = arg[k + 1]
+                    end
+                else
+                    tab[jopt] = true
+                end
+                y = y + 1
+            end
+        end
+    end
+    return tab
+end
+
+local function usage()
+    print([[
+LuaCommander evaluates Lua expressions.
+
+Usage
+    luacmd [OPTIONS...] [FILES...]
+
+Options
+    -e EXPR         Evaluate EXPR
+    -z EXPR         Evaluate EXPR after everything else
+    -n              Evaluate once per line
+    -p              Automatically print each line read
+    -i              Operate in-place over files (keeping backup)
+    -F              Set field separator (default: \s+)
+    -I              Set line separator (default: \n)
+    -v, --version   Show version info
+    -h, --help      Show help
+
+Modules and Functions
+    print           Extended to display tables in human-readable form
+    inspect         Convert tables into human-readable strings
+    one             Returns first argument only
+    ordered         Iterate through keys of table in order
+    sorted          Iterate through values of table in order
+    reverseordered  Iterate through keys in reverse order
+    reversesorted   Iterate through values in reverse order
+    keys            Convert iterator to array of keys
+    values          Convert iterator to array of values
+    re              Regular expression library (PCRE syntax)
+    re.find         Search for regex, return first location
+    re.match        Search for regex, return captures for first match
+    re.gmatch       Iterate through all matches, return captures
+    re.gsub         Replace pattern everywhere
+    re.count        Count how many matches
+    re.split        Iterate through all parts split by regex
+    re.gsplit       Return array of split parts
+
+Variables
+    _       Current line (string)
+    _F      Fields of current line (array of strings)
+    _ln     Current line number (number)
+    _IRS    Line separator regex (string)
+    _CRS    Field separator regex (string)
+]])
+end
+
 local function main(args)
     local lines = false
     local printit = false
@@ -132,33 +224,38 @@ local function main(args)
             if v == '-e' then
                 expr = args[i]
                 i = i + 1
-            else if v == '-z' then
+            elseif v == '-z' then
                 exprEnd = args[i]
                 i = i + 1
-            else if v == '-n' then
+            elseif v == '-n' then
                 lines = true
-            else if v == '-p' then
+            elseif v == '-p' then
                 printit = true
-            else if v == '-F' then
+            elseif v == '-F' then
                 crs = args[i]
                 i = i + 1
-            else if v == '-I' then
+            elseif v == '-I' then
                 irs = args[i]
                 i = i + 1
-            else if v == '-i' then
+            elseif v == '-i' then
                 overwrite = true
-            else if v == '-v' or v == '--v' or v == '-version' or v == '--version' then
+            elseif v == '-v' or v == '--v' or v == '-version' or v == '--version' then
                 print(version(true))
+                return
+            elseif v == '-h' or v == '--help' then
+                usage()
                 return
             else
                 if v:sub(1,1) == '-' then
+                    usage()
                     error('Unknown option ' .. v)
                 end
                 files[#files + 1] = v
                 allowFlags = false
             end
-        end end end end end end end else
+        else
             if v:sub(1,1) == '-' then
+                usage()
                 error('No more options allowed after filename (' .. v .. ')')
             end
             files[#files + 1] = v
@@ -177,10 +274,12 @@ local function main(args)
         exprEndF = exprEndF()
     end
     if not exprF and not exprEndF then
+        usage()
         error('No expression to evaluate')
     end
     if #files == 0 then
         if overwrite then
+            usage()
             error('Cannot overwrite standard input')
         end
         local _ln = __process(exprF, lines, printit, irs, crs)

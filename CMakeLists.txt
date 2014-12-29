@@ -55,6 +55,7 @@ if(UNIX)
       INSTALL_COMMAND ""
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/luajit ${ljpre}
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/libluajit.a ${ljpre}
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${ljsrc}/jit ${ljpre}/jit
     )
     set (ljname libluajit.a)
 else(UNIX)
@@ -87,6 +88,7 @@ set(LUA_FILES_DIR ${PROJECT_BINARY_DIR}/config.lua ${LUA_FILES_DIR})
 add_custom_command(
     DEPENDS project_luajit ${LUA_FILES_DIR}
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c
+    WORKING_DIRECTORY ${ljpre}
     COMMAND ${LUA_BINARY} ${CMAKE_CURRENT_SOURCE_DIR}/tools/combiner.lua ${LUA_FILES_DIR} > ${CMAKE_CURRENT_BINARY_DIR}/luacmd.lua
     COMMAND ${LUA_BINARY} -b -n luacmd ${CMAKE_CURRENT_BINARY_DIR}/luacmd.lua ${CMAKE_CURRENT_BINARY_DIR}/luacmd.c
 )

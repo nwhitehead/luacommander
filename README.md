@@ -171,9 +171,14 @@ Get a copy of the source. Create a build directory named `build`, either
 inside your source tree or somewhere else. Using the Windows SDK Command
 Prompt, run `setenv /release` to set the build environment to release mode.
 If you are on x86_64 and would like to compile for x86 then do
-`setenv /release /x86`.
+`setenv /release /x86`. This should change the font from yellow to green.
 
-This should change the font from yellow to green.
+If you are using the Windows SDK you will need
+to copy `C:\Windows\System32\msvcr100.dll` to
+`C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Redist\x64\Microsoft.VC100.CRT\msvcr100.dll`
+and copy `C:\Windows\SysWOW64\msvcr100.dll` to
+`C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Redist\x86\Microsoft.VC100.CRT\msvcr100.dll`
+
 From the command prompt, navigate to `build` and run
 `cmake -G"NMake Makefiles" -DCMAKE_BUILD_TYPE=Release SOURCEDIR`.
 This will generate makefiles suitable for Microsoft's NMake tool.

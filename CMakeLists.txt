@@ -82,7 +82,7 @@ set(LUA_BINARY ${ljpre}/luajit)
 
 set(LUA_FILES src/inspect.lua src/boot.lua src/main.lua)
 prepend(LUA_FILES_DIR ${CMAKE_CURRENT_SOURCE_DIR} ${LUA_FILES})
-set(LUA_FILES ${PROJECT_BINARY_DIR}/config.lua ${LUA_FILES})
+set(LUA_FILES_DIR ${PROJECT_BINARY_DIR}/config.lua ${LUA_FILES_DIR})
 
 add_custom_command(
     DEPENDS project_luajit ${LUA_FILES_DIR}

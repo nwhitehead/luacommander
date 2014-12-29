@@ -198,6 +198,7 @@ Options
     -i              Operate in-place over files (keeping backups)
     -F REGEX        Set field separator (default: \s+)
     -I REGEX        Set line separator (default: \n)
+    -B PATTERN      Set backup file pattern (default: .bak%-%n)
     -v, --version   Show version info
     -h, --help      Show help
 
@@ -240,7 +241,7 @@ local function main(args)
     local expr = nil
     local exprEnd = nil
     local opt, files = getopt(args, {
-        string={'e', 'z', 'F', 'I'},
+        string={'e', 'z', 'F', 'I', 'B'},
         boolean={'n', 'p', 'i', 'v', 'version', 'h', 'help'}
     })
     if opt.v or opt.version then
@@ -258,6 +259,7 @@ local function main(args)
     crs = opt.F or crs
     irs = opt.I or irs
     overwrite = opt.i or overwrite
+    backupSuffix = opt.B or backupSuffix
 
     local exprF
     if expr then
@@ -288,26 +290,46 @@ local function main(args)
             if overwrite then
                 -- Read contents of file
                 local fin = io.open(file, 'r')
+                if not fin then
+                    error('Could not open ' .. file .. ' for reading')
+                end
                 local data = fin:read('*a')
                 fin:close()
                 -- Save backup
                 local foutname = nil
+                local fouttried = nil
                 for _, testname in backupNames(file, backupSuffix) do
+                    fouttried = testname
                     if not fileExists(testname) then
                         foutname = testname
                         break
                     end
                 end
                 if not foutname then
-                    error('Could not find unused name for backup file ' .. file)
+                    error(string.format('Could not find unused name for backup file %s [last tried %s]', file, fouttried))
                 end
                 local fout = io.open(foutname, 'w')
+                if not fout then
+                    error('Could not open ' .. foutname .. ' for writing')
+                end
                 fout:write(data)
                 fout:close()
                 -- Setup default intput and output
-                io.input(io.open(foutname, 'r'))
-                io.output(io.open(file, 'w'))
+                local infile = io.open(foutname, 'r')
+                if not infile then
+                    error('Could not open ' .. foutname .. ' for reading')
+                end
+                io.input(infile)
+                local outfile = io.open(file, 'w')
+                if not outfile then
+                    error('Could not open ' .. file .. ' for writing')
+                end
+                io.output(outfile)
             else
+                local fin = io.open(file, 'r')
+                if not fin then
+                    error('Could not open ' .. file .. ' for reading')
+                end
                 io.input(file)
             end
             _ln = __process(exprF, lines, printit, irs, crs)

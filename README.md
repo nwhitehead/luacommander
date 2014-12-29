@@ -161,8 +161,6 @@ distribution packages do `cpack`.
 
 ### Windows Build Instructions
 
-(Currently only Windows 64-bit is supported).
-
 First make sure you have either Visual Studio installed or the Microsoft
 Windows SDK for Windows 7 (available at http://www.microsoft.com/en-us/download/details.aspx?id=8279).
 You will also need to install the Microsoft Visual C++ 2010 Redistributable
@@ -172,10 +170,14 @@ Install CMake (available at http://www.cmake.org).
 Get a copy of the source. Create a build directory named `build`, either
 inside your source tree or somewhere else. Using the Windows SDK Command
 Prompt, run `setenv /release` to set the build environment to release mode.
+If you are on x86_64 and would like to compile for x86 then do
+`setenv /release /x86`.
+
 This should change the font from yellow to green.
 From the command prompt, navigate to `build` and run
-`cmake SOURCEDIR -G"NMake Makefiles"`. This will generate makefiles
-suitable for Microsoft's NMake tool. Run `nmake` to do the build.
+`cmake -G"NMake Makefiles" -DCMAKE_BUILD_TYPE=Release SOURCEDIR`.
+This will generate makefiles suitable for Microsoft's NMake tool.
+Run `nmake` to do the build.
 
 To build the binary Windows installer, install NSIS (available at 
 http://nsis.sourceforge.net). Then run `cpack` from the `build`

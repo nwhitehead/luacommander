@@ -155,9 +155,9 @@ install(FILES ${ljpre}/${ljdllname}
 INSTALL(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
 	DESTINATION bin
 	COMPONENT Libraries)
-INSTALL(FILES C:/Windows/SysWOW64/msvcr100.dll
-	DESTINATION bin
-	COMPONENT Libraries)
+INSTALL(FILES C:/Windows/System32/msvcr100.dll
+    DESTINATION bin
+    COMPONENT Libraries)
 endif(UNIX)
 add_custom_target(unittest
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/DESIGN DESIGN

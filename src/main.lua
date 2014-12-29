@@ -1,5 +1,23 @@
 require('boot')
 
+local config = require('config')
+
+function version(long)
+    local v = config.version
+    if long then
+        local line = string.rep('=', 60)
+        return table.concat({
+            line,
+            string.format('LuaCommander-v%s.%s.%s',
+            v.major, v.minor, v.patch) ..
+            string.format('\t\t[git: %s-%s]', v.branch, v.commit),
+            string.format('%s', v.copyright),
+            line,
+        }, '\n')
+    end
+    return string.format('v%s.%s.%s', v[1], v[2], v[3])
+end
+
 -- Check if string starts with another string (no patterns)
 local function startswith(s, x)
     return s:sub(1, #x) == x
@@ -129,6 +147,9 @@ local function main(args)
                 i = i + 1
             else if v == '-i' then
                 overwrite = true
+            else if v == '-v' or v == '--v' or v == '-version' or v == '--version' then
+                print(version(true))
+                return
             else
                 if v:sub(1,1) == '-' then
                     error('Unknown option ' .. v)
@@ -136,7 +157,7 @@ local function main(args)
                 files[#files + 1] = v
                 allowFlags = false
             end
-        end end end end end end else
+        end end end end end end end else
             if v:sub(1,1) == '-' then
                 error('No more options allowed after filename (' .. v .. ')')
             end

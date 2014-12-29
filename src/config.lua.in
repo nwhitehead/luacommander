@@ -1,0 +1,10 @@
+return {
+    version = {
+        major="@luacmd_VERSION_MAJOR@",
+        minor="@luacmd_VERSION_MINOR@",
+        patch="@luacmd_VERSION_PATCH@",
+        branch="@GIT_BRANCH@",
+        commit="@GIT_COMMIT_HASH@",
+        copyright="Copyright (C) 2014 Nathan Whitehead. All rights reserved.",
+    },
+}

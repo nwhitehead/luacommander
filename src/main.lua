@@ -128,7 +128,10 @@ end
 
 local function getopt(arg, options)
     local tab = {}
-    for k, v in ipairs(arg) do
+    local files = {}
+    local k = 1
+    while k <= #arg do
+        local v = arg[k]
         if string.sub(v, 1, 2) == "--" then
             local x = string.find(v, "=", 1, true)
             if x then
@@ -147,16 +150,20 @@ local function getopt(arg, options)
                         tab[jopt] = string.sub(v, y+1)
                         y = l
                     else
-                        tab[jopt ] = arg[k + 1]
+                        tab[jopt] = arg[k + 1]
+                        k = k + 1
                     end
                 else
                     tab[jopt] = true
                 end
                 y = y + 1
             end
+        else
+            files[#files + 1] = v
         end
+        k = k + 1
     end
-    return tab
+    return tab, files
 end
 
 local function usage()
@@ -171,9 +178,9 @@ Options
     -z EXPR         Evaluate EXPR after everything else
     -n              Evaluate once per line
     -p              Automatically print each line read
-    -i              Operate in-place over files (keeping backup)
-    -F              Set field separator (default: \s+)
-    -I              Set line separator (default: \n)
+    -i              Operate in-place over files (keeping backups)
+    -F REGEX        Set field separator (default: \s+)
+    -I REGEX        Set line separator (default: \n)
     -v, --version   Show version info
     -h, --help      Show help
 
@@ -214,53 +221,25 @@ local function main(args)
     local crs = nil
     local expr = nil
     local exprEnd = nil
-    local allowFlags = true
-    local files = {}
-    local i = 1
-    while i <= #args do
-        v = args[i]
-        i = i + 1
-        if allowFlags then
-            if v == '-e' then
-                expr = args[i]
-                i = i + 1
-            elseif v == '-z' then
-                exprEnd = args[i]
-                i = i + 1
-            elseif v == '-n' then
-                lines = true
-            elseif v == '-p' then
-                printit = true
-            elseif v == '-F' then
-                crs = args[i]
-                i = i + 1
-            elseif v == '-I' then
-                irs = args[i]
-                i = i + 1
-            elseif v == '-i' then
-                overwrite = true
-            elseif v == '-v' or v == '--v' or v == '-version' or v == '--version' then
-                print(version(true))
-                return
-            elseif v == '-h' or v == '--help' then
-                usage()
-                return
-            else
-                if v:sub(1,1) == '-' then
-                    usage()
-                    error('Unknown option ' .. v)
-                end
-                files[#files + 1] = v
-                allowFlags = false
-            end
-        else
-            if v:sub(1,1) == '-' then
-                usage()
-                error('No more options allowed after filename (' .. v .. ')')
-            end
-            files[#files + 1] = v
-        end
+    local opt, files = getopt(args,
+        'ezFI'
+    )
+    if opt.v or opt.version then
+        print(version(true))
+        return
     end
+    if opt.h or opt.help then
+        usage()
+        return
+    end
+    expr = opt.e or expr
+    exprEnd = opt.z or exprEnd
+    lines = opt.n or lines
+    printit = opt.p or printit
+    crs = opt.F or crs
+    irs = opt.I or irs
+    overwrite = opt.i or overwrite
+
     local exprF
     if expr then
         exprF, err = loadstring(string.format('return function(_, _F, _ln) %s end', expr), '=[expression]')

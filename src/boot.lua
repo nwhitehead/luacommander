@@ -102,12 +102,40 @@ end
 
 -- Flatten an iterator into an actual array of keys visited
 function keys(iter, s0, i)
+    if type(iter) == 'table' then
+        return array(pairs(iter), iter, nil, function(k, v) return k end)
+    end
     return array(iter, s0, i, function(k, v) return k end)
 end
 
 -- Flatten an iterator into an actual array of values visited
 function values(iter, s0, i)
+    if type(iter) == 'table' then
+        return array(pairs(iter), iter, nil, function(k, v) return v end)
+    end
     return array(iter, s0, i, function(k, v) return v end)
+end
+
+-- Transpose keys and values in a table
+-- Resulting values are arrays of keys for that value
+function transpose(tbl)
+    local res = {}
+    for k, v in pairs(tbl) do
+        res[v] = res[v] or {}
+        res[v][#res[v] + 1] = k
+    end
+    return res
+end
+
+-- Transpose keys and values, assuming input is table of arrays
+function untranspose(tbl)
+    local res = {}
+    for k, arr in pairs(tbl) do
+        for _, v in pairs(arr) do
+            res[v] = k
+        end
+    end
+    return res
 end
 
 -- Split a string based on a delimeter

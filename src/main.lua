@@ -127,6 +127,7 @@ end
 --      this behavior isn't implemented.
 
 local function getopt(arg, options)
+    options = untranspose(options)
     local tab = {}
     local files = {}
     local k = 1
@@ -135,9 +136,23 @@ local function getopt(arg, options)
         if string.sub(v, 1, 2) == "--" then
             local x = string.find(v, "=", 1, true)
             if x then
-                tab[string.sub(v, 3, x-1)] = string.sub(v, x+1)
+                local jopt = string.sub(v, 3, x-1)
+                if options[jopt] == nil then
+                    error('Unknown option ' .. jopt)
+                end
+                if options[jopt] ~= 'string' then
+                    error('Option ' .. jopt .. ' does not take a string')
+                end
+                tab[jopt] = string.sub(v, x+1)
             else
-                tab[string.sub(v, 3)] = true
+                local jopt = string.sub(v, 3)
+                if options[jopt] == nil then
+                    error('Unknown option ' .. jopt)
+                end
+                if options[jopt] ~= 'boolean' then
+                    error('Option ' .. jopt .. ' is not a boolean flag')
+                end
+                tab[jopt] = true
             end
         elseif string.sub(v, 1, 1) == "-" then
             local y = 2
@@ -145,7 +160,7 @@ local function getopt(arg, options)
             local jopt
             while (y <= l) do
                 jopt = string.sub(v, y, y)
-                if string.find(options, jopt, 1, true) then
+                if options[jopt] == 'string' then
                     if y < l then
                         tab[jopt] = string.sub(v, y+1)
                         y = l
@@ -153,8 +168,10 @@ local function getopt(arg, options)
                         tab[jopt] = arg[k + 1]
                         k = k + 1
                     end
-                else
+                elseif options[jopt] == 'boolean' then
                     tab[jopt] = true
+                else
+                    error('Unknown option ' .. jopt)
                 end
                 y = y + 1
             end
@@ -194,6 +211,7 @@ Modules and Functions
     reversesorted   Iterate through values in reverse order
     keys            Convert iterator to array of keys
     values          Convert iterator to array of values
+    transpose       Transpose keys and values from a table
     re              Regular expression library (PCRE syntax)
     re.find         Search for regex, return first location
     re.match        Search for regex, return captures for first match
@@ -221,9 +239,10 @@ local function main(args)
     local crs = nil
     local expr = nil
     local exprEnd = nil
-    local opt, files = getopt(args,
-        'ezFI'
-    )
+    local opt, files = getopt(args, {
+        string={'e', 'z', 'F', 'I'},
+        boolean={'n', 'p', 'i', 'v', 'version', 'h', 'help'}
+    })
     if opt.v or opt.version then
         print(version(true))
         return

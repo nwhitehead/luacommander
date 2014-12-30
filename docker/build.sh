@@ -4,7 +4,10 @@ set -e
 
 # Get user configuration from file
 URL="https://github.com/nwhitehead/luacommander.git"
-BUILD_COMMAND="mkdir -p /root/build && cd /root/build && cmake /root/project && make && cpack"
+BUILD_COMMAND="mkdir -p /root/build && cd /root/build && export CC= && export CROSSCC= && cmake /root/project && make && cpack"
+BUILD32_COMMAND="mkdir -p /root/build && cd /root/build && export CC=\"gcc -m32\" && export CROSSCC=\"gcc -m32\" && cmake /root/project && make && cpack"
+# BUG - aufs has problems actually deleting this directory, so delete contents
+CLEAN_COMMAND="rm -fr /root/build/*"
 NAME="luacmd"
 GET_COMMAND="cd /root/build && tar cO *.zip | gzip -f"
 
@@ -60,5 +63,30 @@ else
         rm cid
         echo "GIT PULLED"
         exit 0
+    fi
+    if [ "$COMMAND" = "build32" ];
+    then
+        echo "BUILDING FOR 32BIT"
+        # Run the build command
+        echo $BUILD32_COMMAND
+        echo "You may need to remove the cid file if this fails"
+        docker run --cidfile="cid" -a stdout -a stdin $NAME/latest /bin/sh -c "$BUILD32_COMMAND"
+        # Commit changes
+        docker commit `cat cid` $NAME/latest
+        rm cid
+        echo "BUILD SUCCEEDED"
+    fi
+    if [ "$COMMAND" = "clean" ];
+    then
+        echo "CLEANING BUILD"
+        # Run the build command
+        echo $CLEAN_COMMAND
+        echo "You may need to remove the cid file if this fails"
+        docker run --cidfile="cid" -a stdout -a stdin $NAME/latest /bin/sh -c "$CLEAN_COMMAND"
+        # Commit changes
+        docker commit `cat cid` $NAME/latest
+        echo "$NAME/latest -> `cat cid`"
+        rm cid
+        echo "CLEAN SUCCEEDED"
     fi
 fi

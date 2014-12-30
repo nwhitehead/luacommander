@@ -221,6 +221,7 @@ Modules and Functions
     re.count        Count how many matches
     re.split        Iterate through all parts split by regex
     re.gsplit       Return array of split parts
+    re.fsplit       Return split parts including delimeter matches
 
 Variables
     _       Current line (string)

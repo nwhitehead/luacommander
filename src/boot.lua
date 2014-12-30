@@ -146,3 +146,17 @@ function re.gsplit(str, delim, opts)
     end
     return result
 end
+
+-- Split a string based on delimeter
+-- Return array of subjects and splitters
+function re.fsplit(txt, delim, opt)
+    local res = {}
+    local n = 1
+    for subj, sep in re.split(txt, delim, opt) do
+        res[n] = subj
+        n = n + 1
+        res[n] = sep
+        n = n + 1
+    end
+    return res
+end

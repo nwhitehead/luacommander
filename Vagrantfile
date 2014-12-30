@@ -1,1 +1,1 @@
-vagrantconf/Vagrantfile.CentOS56.x86_64
+vagrantconf/Vagrantfile.CentOS56.i386

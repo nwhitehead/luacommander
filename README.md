@@ -142,7 +142,7 @@ with `-i` at one time; the expression reads/writes each file in turn.
 If the `-z` option is also given, the final expression reads from standard
 input and writes to standard output.
 
-## Build Requirements
+## Build from Source
 
 To build from source you need CMake (available from http://www.cmake.org).
 You need a platform with working compiler that supports LuaJIT 2.0+
@@ -151,39 +151,4 @@ be easy. For Windows the supported compiler is the Windows SDK command-line
 tools based on Visual Studio 2010. The build also depends on PCRE
 (documentation at http://pcre.org) which should be supported by all platforms.
 
-### Linux and Mac OS X Build Instructions
-
-Get a copy of the source. Create a build directory named `build`, it may
-be inside your source directory of somewhere else. From `build` run
-`cmake SOURCEDIR` giving the path to the source directory. Then run
-`make`. To install locally you can do `sudo make install`. To build
-distribution packages do `cpack`.
-
-### Windows Build Instructions
-
-First make sure you have either Visual Studio installed or the Microsoft
-Windows SDK for Windows 7 (available at http://www.microsoft.com/en-us/download/details.aspx?id=8279).
-You will also need to install the Microsoft Visual C++ 2010 Redistributable
-package (available at http://www.microsoft.com/en-us/download/details.aspx?id=14632).
-Install CMake (available at http://www.cmake.org).
-
-Get a copy of the source. Create a build directory named `build`, either
-inside your source tree or somewhere else. Using the Windows SDK Command
-Prompt, run `setenv /release` to set the build environment to release mode.
-If you are on x86_64 and would like to compile for x86 then do
-`setenv /release /x86`. This should change the font from yellow to green.
-
-If you are using the Windows SDK you will need
-to copy `C:\Windows\System32\msvcr100.dll` to
-`C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Redist\x64\Microsoft.VC100.CRT\msvcr100.dll`
-and copy `C:\Windows\SysWOW64\msvcr100.dll` to
-`C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Redist\x86\Microsoft.VC100.CRT\msvcr100.dll`
-
-From the command prompt, navigate to `build` and run
-`cmake -G"NMake Makefiles" -DCMAKE_BUILD_TYPE=Release SOURCEDIR`.
-This will generate makefiles suitable for Microsoft's NMake tool.
-Run `nmake` to do the build.
-
-To build the binary Windows installer, install NSIS (available at 
-http://nsis.sourceforge.net). Then run `cpack` from the `build`
-directory to create the installer and zip archive.
+For details on the build process, see [BUILD.md](BUILD.md).

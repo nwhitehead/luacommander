@@ -50,8 +50,8 @@ if("$ENV{CROSSCC}" STREQUAL "")
     set(cross_flag "")
 else("$ENV{CROSSCC}" STREQUAL "")
     set(cross_flag "CC=$ENV{CROSSCC}")
+    message("!!!!!!Cross compiling!!!!!!!! ${cross_flag}")
 endif("$ENV{CROSSCC}" STREQUAL "")
-message("!!!!!!Cross compiling!!!!!!!! ${cross_flag}")
 
 if(UNIX)
     ExternalProject_Add(project_luajit

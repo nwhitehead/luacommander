@@ -2,4 +2,4 @@ build/
 out/
 *.o
 .DS_Store
-
+.tags

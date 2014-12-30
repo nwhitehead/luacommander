@@ -45,13 +45,21 @@ set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set(ljpre ${CMAKE_CURRENT_BINARY_DIR}/luajit-2.0.3)
 set(ljsrc ${ljpre}/src/project_luajit/src)
+# If CROSSCC is set in environment we are cross compiling (prob 32 on 64)
+if("$ENV{CROSSCC}" STREQUAL "")
+    set(cross_flag "")
+else("$ENV{CROSSCC}" STREQUAL "")
+    set(cross_flag "CC=$ENV{CROSSCC}")
+endif("$ENV{CROSSCC}" STREQUAL "")
+message("!!!!!!Cross compiling!!!!!!!! ${cross_flag}")
+
 if(UNIX)
     ExternalProject_Add(project_luajit
       URL ${CMAKE_CURRENT_SOURCE_DIR}/external/LuaJIT-2.0.3.tar.gz
       PREFIX ${ljpre}
       CONFIGURE_COMMAND ""
       BUILD_IN_SOURCE 1
-      BUILD_COMMAND make -j8
+      BUILD_COMMAND make -j8 ${cross_flag}
       INSTALL_COMMAND ""
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/luajit ${ljpre}
       COMMAND ${CMAKE_COMMAND} -E copy ${ljsrc}/libluajit.a ${ljpre}
@@ -97,6 +105,7 @@ ExternalProject_Add(project_pcre
   URL ${CMAKE_CURRENT_SOURCE_DIR}/external/pcre-8.36.tar.gz
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/pcre-8.36
   CMAKE_ARGS
+  BUILD_COMMAND "${CMAKE_COMMAND}" --build . --target pcre
   INSTALL_COMMAND ""
 )
 ExternalProject_Get_Property(project_pcre binary_dir)

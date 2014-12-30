@@ -44,10 +44,21 @@ then
 else
     echo "COMMAND " $COMMAND
     if [ "$COMMAND" = "get" ];
-        echo "GETTTING"
+    then
+        echo "GETTING"
         docker run $NAME/latest /bin/sh -c "$GET_COMMAND" > result.tar.gz
         echo "RESULTS ARE IN result.tar.gz"
+        exit 0
+    fi
+    if [ "$COMMAND" = "pull" ];
     then
-        echo "OTHER"
+        echo "PULLING"
+        echo "You may need to remove the cid file if this fails"
+        docker run --cidfile="cid" -a stdout -a stdin $NAME/latest /bin/sh -c "cd /root/project; git pull"
+        # Commit changes
+        docker commit `cat cid` $NAME/latest
+        rm cid
+        echo "GIT PULLED"
+        exit 0
     fi
 fi

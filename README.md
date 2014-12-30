@@ -69,14 +69,12 @@ luacmd -i -n -e "print(':' .. _)" FILE
 
 ## Get It Now
 
-No need to hassle with building. Lua Commander is available in
-binary packages for the following platforms:
-* Linux 32- and 64-bit (binary works on most distros)
-* Mac OS X
-* Windows 32- and 64-bit
+Download the [latest releases](https://github.com/nwhitehead/luacommander/releases/latest).
 
-Get the latest releases here
-(https://github.com/nwhitehead/luacommander/releases/latest).
+Lua Commander is available in binary packages for the following platforms:
+* Windows 32- and 64-bit
+* Mac OS X
+* Linux 32- and 64-bit (binary works on most distros)
 
 ## Usage Notes
 

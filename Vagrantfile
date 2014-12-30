@@ -1,10 +1,1 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
-
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.box = "hansode/centos-5.6-i386"
-    config.vm.provision :shell, path: "VagrantProvision.sh"
-end
+vagrantconf/Vagrantfile.CentOS56.x86_64

@@ -1,5 +1,6 @@
 build/
+dist/
 out/
 *.o
 .DS_Store
-.tags
+.vagrant

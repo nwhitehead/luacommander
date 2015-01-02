@@ -190,3 +190,20 @@ function fromCSV(s)
     until fieldstart > string.len(s)
     return t
 end
+
+-- Escape comma and quotations inside CSV fields
+local function escapeCSV(s)
+    if string.find(s, '[,"]') then
+        s = '"' .. string.gsub(s, '"', '""') .. '"'
+    end
+    return s
+end
+
+-- Convert from table to CSV string
+function toCSV(tt)
+    local s = {}
+    for k, p in ipairs(tt) do
+        s[k] = escapeCSV(p)
+    end
+    return table.concat(s, ',')
+end

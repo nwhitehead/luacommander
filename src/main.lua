@@ -222,6 +222,8 @@ Modules and Functions
     re.split        Iterate through all parts split by regex
     re.gsplit       Return array of split parts
     re.fsplit       Return split parts including delimeter matches
+    fromCSV         Return array of strings from one line of CSV data
+    toCSV           Convert array of strings into string for CSV
 
 Variables
     _       Current line (string)
